@@ -1,7 +1,10 @@
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), tailwindcss(),],
+import { defineMekoCrmViteConfig } from '../common/configs/vite.base.js'
+
+export default defineMekoCrmViteConfig('meko-crm-form', {
+  defineConfig,
+  react,
+  tailwindcss,
 })

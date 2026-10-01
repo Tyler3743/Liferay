@@ -1,0 +1,16 @@
+assemble:
+  - from: dist
+    into: static
+
+meko-crm-courses:
+  cssURLs:
+    - meko-crm-courses.css
+  friendlyURLMapping: meko-crm-courses
+  htmlElementName: meko-crm-courses
+  instanceable: true
+  name: Meko CRM - Quản Lý Khóa Học
+  portletCategoryName: category.client-extensions
+  type: customElement
+  urls:
+    - meko-crm-courses.js
+  useESM: true

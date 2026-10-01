@@ -1,0 +1,16 @@
+assemble:
+  - from: dist
+    into: static
+
+meko-crm-class:
+  cssURLs:
+    - meko-crm-class.css
+  friendlyURLMapping: meko-crm-class
+  htmlElementName: meko-crm-class
+  instanceable: true
+  name: Meko CRM - Quản Lý Lớp Học
+  portletCategoryName: category.client-extensions
+  type: customElement
+  urls:
+    - meko-crm-class.js
+  useESM: true

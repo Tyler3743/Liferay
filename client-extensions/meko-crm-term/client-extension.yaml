@@ -1,0 +1,16 @@
+assemble:
+  - from: dist
+    into: static
+
+meko-crm-term:
+  cssURLs:
+    - meko-crm-term.css
+  friendlyURLMapping: meko-crm-term
+  htmlElementName: meko-crm-term
+  instanceable: true
+  name: Meko CRM - Quản Lý Học Kỳ / Niên Khóa
+  portletCategoryName: category.client-extensions
+  type: customElement
+  urls:
+    - meko-crm-term.js
+  useESM: true

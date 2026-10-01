@@ -1,0 +1,16 @@
+assemble:
+  - from: dist
+    into: static
+
+meko-crm-form:
+  cssURLs:
+    - meko-crm-form.css
+  friendlyURLMapping: meko-crm-form
+  htmlElementName: meko-crm-form
+  instanceable: true
+  name: Meko CRM - Form Đăng Ký Tư Vấn
+  portletCategoryName: category.client-extensions
+  type: customElement
+  urls:
+    - meko-crm-form.js
+  useESM: true
