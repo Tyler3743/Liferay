@@ -1,0 +1,16 @@
+assemble:
+  - from: dist
+    into: static
+
+meko-crm-portal:
+  cssURLs:
+    - meko-crm-portal.css
+  friendlyURLMapping: meko-crm-portal
+  htmlElementName: meko-crm-portal
+  instanceable: true
+  name: Meko CRM - Cổng Điều Hướng
+  portletCategoryName: category.client-extensions
+  type: customElement
+  urls:
+    - meko-crm-portal.js
+  useESM: true

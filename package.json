@@ -2,7 +2,15 @@
     "private": true,
     "workspaces": {
         "packages": [
-            "client-extension"
+            "client-extensions\\common\\configs",
+            "client-extensions\\crm-kanban-widget",
+            "client-extensions\\meko-crm-app-backup",
+            "client-extensions\\meko-crm-class",
+            "client-extensions\\meko-crm-courses",
+            "client-extensions\\meko-crm-form",
+            "client-extensions\\meko-crm-kanban",
+            "client-extensions\\meko-crm-portal",
+            "client-extensions\\meko-crm-term"
         ]
     }
 }
