@@ -2,3 +2,1404 @@
 # yarn lockfile v1
 
 
+"@babel/code-frame@^7.29.7":
+  version "7.29.7"
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.29.7"
+    js-tokens "^4.0.0"
+    picocolors "^1.1.1"
+
+"@babel/compat-data@^7.29.7":
+  version "7.29.7"
+
+"@babel/core@^7.0.0", "@babel/core@^7.24.4":
+  version "7.29.7"
+  dependencies:
+    "@babel/code-frame" "^7.29.7"
+    "@babel/generator" "^7.29.7"
+    "@babel/helper-compilation-targets" "^7.29.7"
+    "@babel/helper-module-transforms" "^7.29.7"
+    "@babel/helpers" "^7.29.7"
+    "@babel/parser" "^7.29.7"
+    "@babel/template" "^7.29.7"
+    "@babel/traverse" "^7.29.7"
+    "@babel/types" "^7.29.7"
+    "@jridgewell/remapping" "^2.3.5"
+    convert-source-map "^2.0.0"
+    debug "^4.1.0"
+    gensync "^1.0.0-beta.2"
+    json5 "^2.2.3"
+    semver "^6.3.1"
+
+"@babel/generator@^7.29.7", "@babel/generator@^7.29.8":
+  version "7.29.8"
+  dependencies:
+    "@babel/parser" "^7.29.8"
+    "@babel/types" "^7.29.8"
+    "@jridgewell/gen-mapping" "^0.3.12"
+    "@jridgewell/trace-mapping" "^0.3.28"
+    jsesc "^3.0.2"
+
+"@babel/helper-compilation-targets@^7.29.7":
+  version "7.29.7"
+  dependencies:
+    "@babel/compat-data" "^7.29.7"
+    "@babel/helper-validator-option" "^7.29.7"
+    browserslist "^4.24.0"
+    lru-cache "^5.1.1"
+    semver "^6.3.1"
+
+"@babel/helper-globals@^7.29.7":
+  version "7.29.7"
+
+"@babel/helper-module-imports@^7.29.7":
+  version "7.29.7"
+  dependencies:
+    "@babel/traverse" "^7.29.7"
+    "@babel/types" "^7.29.7"
+
+"@babel/helper-module-transforms@^7.29.7":
+  version "7.29.7"
+  dependencies:
+    "@babel/helper-module-imports" "^7.29.7"
+    "@babel/helper-validator-identifier" "^7.29.7"
+    "@babel/traverse" "^7.29.7"
+
+"@babel/helper-string-parser@^7.29.7":
+  version "7.29.7"
+
+"@babel/helper-validator-identifier@^7.29.7":
+  version "7.29.7"
+
+"@babel/helper-validator-option@^7.29.7":
+  version "7.29.7"
+
+"@babel/helpers@^7.29.7":
+  version "7.29.7"
+  dependencies:
+    "@babel/template" "^7.29.7"
+    "@babel/types" "^7.29.7"
+
+"@babel/parser@^7.24.4", "@babel/parser@^7.29.7", "@babel/parser@^7.29.8":
+  version "7.29.9"
+  dependencies:
+    "@babel/types" "^7.29.8"
+
+"@babel/runtime@^7.26.7":
+  version "7.29.7"
+
+"@babel/template@^7.29.7":
+  version "7.29.7"
+  dependencies:
+    "@babel/code-frame" "^7.29.7"
+    "@babel/parser" "^7.29.7"
+    "@babel/types" "^7.29.7"
+
+"@babel/traverse@^7.29.7":
+  version "7.29.8"
+  dependencies:
+    "@babel/code-frame" "^7.29.7"
+    "@babel/generator" "^7.29.8"
+    "@babel/helper-globals" "^7.29.7"
+    "@babel/parser" "^7.29.8"
+    "@babel/template" "^7.29.7"
+    "@babel/types" "^7.29.8"
+    debug "^4.3.1"
+
+"@babel/types@^7.29.7", "@babel/types@^7.29.8":
+  version "7.29.8"
+  dependencies:
+    "@babel/helper-string-parser" "^7.29.7"
+    "@babel/helper-validator-identifier" "^7.29.7"
+
+"@cacheable/memory@^2.2.0":
+  version "2.2.0"
+  dependencies:
+    "@cacheable/utils" "^2.5.0"
+    "@keyv/bigmap" "^1.3.1"
+    hookified "^1.15.1"
+    keyv "^5.6.0"
+
+"@cacheable/utils@^2.5.0":
+  version "2.5.0"
+  dependencies:
+    hashery "^1.5.1"
+    keyv "^5.6.0"
+
+"@eslint-community/eslint-utils@^4.8.0", "@eslint-community/eslint-utils@^4.9.1":
+  version "4.10.1"
+  dependencies:
+    eslint-visitor-keys "^3.4.3"
+
+"@eslint-community/regexpp@^4.12.2":
+  version "4.12.2"
+
+"@eslint/config-array@^0.23.5":
+  version "0.23.5"
+  dependencies:
+    "@eslint/object-schema" "^3.0.5"
+    debug "^4.3.1"
+    minimatch "^10.2.4"
+
+"@eslint/config-helpers@^0.7.0":
+  version "0.7.0"
+  dependencies:
+    "@eslint/core" "^1.2.1"
+
+"@eslint/core@^1.2.1":
+  version "1.2.1"
+  dependencies:
+    "@types/json-schema" "^7.0.15"
+
+"@eslint/js@^10.0.1":
+  version "10.0.1"
+
+"@eslint/object-schema@^3.0.5":
+  version "3.0.5"
+
+"@eslint/plugin-kit@^0.7.3":
+  version "0.7.3"
+  dependencies:
+    "@eslint/core" "^1.2.1"
+    levn "^0.4.1"
+
+"@hello-pangea/dnd@^18.0.1":
+  version "18.0.1"
+  dependencies:
+    "@babel/runtime" "^7.26.7"
+    css-box-model "^1.2.1"
+    raf-schd "^4.0.3"
+    react-redux "^9.2.0"
+    redux "^5.0.1"
+
+"@humanfs/core@^0.19.2":
+  version "0.19.2"
+  dependencies:
+    "@humanfs/types" "^0.15.0"
+
+"@humanfs/node@^0.16.6":
+  version "0.16.8"
+  dependencies:
+    "@humanfs/core" "^0.19.2"
+    "@humanfs/types" "^0.15.0"
+    "@humanwhocodes/retry" "^0.4.0"
+
+"@humanfs/types@^0.15.0":
+  version "0.15.0"
+
+"@humanwhocodes/module-importer@^1.0.1":
+  version "1.0.1"
+
+"@humanwhocodes/retry@^0.4.0", "@humanwhocodes/retry@^0.4.2":
+  version "0.4.3"
+
+"@jridgewell/gen-mapping@^0.3.12", "@jridgewell/gen-mapping@^0.3.5":
+  version "0.3.13"
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.5.0"
+    "@jridgewell/trace-mapping" "^0.3.24"
+
+"@jridgewell/remapping@^2.3.5":
+  version "2.3.5"
+  dependencies:
+    "@jridgewell/gen-mapping" "^0.3.5"
+    "@jridgewell/trace-mapping" "^0.3.24"
+
+"@jridgewell/resolve-uri@^3.1.0":
+  version "3.1.2"
+
+"@jridgewell/sourcemap-codec@^1.4.14", "@jridgewell/sourcemap-codec@^1.5.0", "@jridgewell/sourcemap-codec@^1.5.5":
+  version "1.6.0"
+
+"@jridgewell/trace-mapping@^0.3.24", "@jridgewell/trace-mapping@^0.3.28":
+  version "0.3.31"
+  dependencies:
+    "@jridgewell/resolve-uri" "^3.1.0"
+    "@jridgewell/sourcemap-codec" "^1.4.14"
+
+"@keyv/bigmap@^1.3.1":
+  version "1.3.1"
+  dependencies:
+    hashery "^1.4.0"
+    hookified "^1.15.0"
+
+"@keyv/serialize@^1.1.1":
+  version "1.1.1"
+
+"@oxc-project/types@=0.152.0":
+  version "0.152.0"
+
+"@rolldown/binding-win32-x64-msvc@1.2.12":
+  version "1.2.12"
+
+"@rolldown/pluginutils@^1.0.0", "@rolldown/pluginutils@^1.0.1":
+  version "1.0.1"
+
+"@tailwindcss/node@4.3.3":
+  version "4.3.3"
+  dependencies:
+    "@jridgewell/remapping" "^2.3.5"
+    enhanced-resolve "^5.24.1"
+    jiti "^2.7.0"
+    lightningcss "1.32.0"
+    magic-string "^0.30.21"
+    source-map-js "^1.2.1"
+    tailwindcss "4.3.3"
+
+"@tailwindcss/oxide-win32-x64-msvc@4.3.3":
+  version "4.3.3"
+
+"@tailwindcss/oxide@4.3.3":
+  version "4.3.3"
+  optionalDependencies:
+    "@tailwindcss/oxide-android-arm64" "4.3.3"
+    "@tailwindcss/oxide-darwin-arm64" "4.3.3"
+    "@tailwindcss/oxide-darwin-x64" "4.3.3"
+    "@tailwindcss/oxide-freebsd-x64" "4.3.3"
+    "@tailwindcss/oxide-linux-arm-gnueabihf" "4.3.3"
+    "@tailwindcss/oxide-linux-arm64-gnu" "4.3.3"
+    "@tailwindcss/oxide-linux-arm64-musl" "4.3.3"
+    "@tailwindcss/oxide-linux-x64-gnu" "4.3.3"
+    "@tailwindcss/oxide-linux-x64-musl" "4.3.3"
+    "@tailwindcss/oxide-wasm32-wasi" "4.3.3"
+    "@tailwindcss/oxide-win32-arm64-msvc" "4.3.3"
+    "@tailwindcss/oxide-win32-x64-msvc" "4.3.3"
+
+"@tailwindcss/vite@^4.3.3":
+  version "4.3.3"
+  dependencies:
+    "@tailwindcss/node" "4.3.3"
+    "@tailwindcss/oxide" "4.3.3"
+    tailwindcss "4.3.3"
+
+"@types/esrecurse@^4.3.1":
+  version "4.3.1"
+
+"@types/estree@^1.0.6", "@types/estree@^1.0.8":
+  version "1.0.9"
+
+"@types/json-schema@^7.0.15":
+  version "7.0.15"
+
+"@types/node@^20.19.0 || >=22.12.0", "@types/node@^24.13.3":
+  version "24.19.1"
+  dependencies:
+    undici-types ">=7.24.0 <7.24.7"
+
+"@types/react-dom@^19.2.7", "@types/react-dom@^19.3.0":
+  version "19.3.0"
+
+"@types/react@*", "@types/react@^18.2.25 || ^19", "@types/react@^19.2.18", "@types/react@^19.3.0":
+  version "19.3.0"
+  dependencies:
+    csstype "^3.2.2"
+
+"@types/use-sync-external-store@^0.0.6":
+  version "0.0.6"
+
+"@typescript-eslint/eslint-plugin@8.71.0":
+  version "8.71.0"
+  dependencies:
+    "@eslint-community/regexpp" "^4.12.2"
+    "@typescript-eslint/scope-manager" "8.71.0"
+    "@typescript-eslint/type-utils" "8.71.0"
+    "@typescript-eslint/utils" "8.71.0"
+    "@typescript-eslint/visitor-keys" "8.71.0"
+    ignore "^7.0.5"
+    natural-compare "^1.4.0"
+    ts-api-utils "^2.5.0"
+
+"@typescript-eslint/parser@^8.71.0", "@typescript-eslint/parser@8.71.0":
+  version "8.71.0"
+  dependencies:
+    "@typescript-eslint/scope-manager" "8.71.0"
+    "@typescript-eslint/types" "8.71.0"
+    "@typescript-eslint/typescript-estree" "8.71.0"
+    "@typescript-eslint/visitor-keys" "8.71.0"
+    debug "^4.4.3"
+
+"@typescript-eslint/project-service@8.71.0":
+  version "8.71.0"
+  dependencies:
+    "@typescript-eslint/tsconfig-utils" "^8.71.0"
+    "@typescript-eslint/types" "^8.71.0"
+    debug "^4.4.3"
+
+"@typescript-eslint/scope-manager@8.71.0":
+  version "8.71.0"
+  dependencies:
+    "@typescript-eslint/types" "8.71.0"
+    "@typescript-eslint/visitor-keys" "8.71.0"
+
+"@typescript-eslint/tsconfig-utils@^8.71.0", "@typescript-eslint/tsconfig-utils@8.71.0":
+  version "8.71.0"
+
+"@typescript-eslint/type-utils@8.71.0":
+  version "8.71.0"
+  dependencies:
+    "@typescript-eslint/types" "8.71.0"
+    "@typescript-eslint/typescript-estree" "8.71.0"
+    "@typescript-eslint/utils" "8.71.0"
+    debug "^4.4.3"
+    ts-api-utils "^2.5.0"
+
+"@typescript-eslint/types@^8.71.0", "@typescript-eslint/types@8.71.0":
+  version "8.71.0"
+
+"@typescript-eslint/typescript-estree@8.71.0":
+  version "8.71.0"
+  dependencies:
+    "@typescript-eslint/project-service" "8.71.0"
+    "@typescript-eslint/tsconfig-utils" "8.71.0"
+    "@typescript-eslint/types" "8.71.0"
+    "@typescript-eslint/visitor-keys" "8.71.0"
+    debug "^4.4.3"
+    minimatch "^10.2.2"
+    semver "^7.7.3"
+    tinyglobby "^0.2.15"
+    ts-api-utils "^2.5.0"
+
+"@typescript-eslint/utils@8.71.0":
+  version "8.71.0"
+  dependencies:
+    "@eslint-community/eslint-utils" "^4.9.1"
+    "@typescript-eslint/scope-manager" "8.71.0"
+    "@typescript-eslint/types" "8.71.0"
+    "@typescript-eslint/typescript-estree" "8.71.0"
+
+"@typescript-eslint/visitor-keys@8.71.0":
+  version "8.71.0"
+  dependencies:
+    "@typescript-eslint/types" "8.71.0"
+    eslint-visitor-keys "^5.0.0"
+
+"@typescript/typescript-win32-x64@7.0.2":
+  version "7.0.2"
+
+"@vitejs/plugin-react@^6.1.1":
+  version "6.1.1"
+  dependencies:
+    "@rolldown/pluginutils" "^1.0.1"
+
+accepts@~1.3.8:
+  version "1.3.8"
+  dependencies:
+    mime-types "~2.1.34"
+    negotiator "0.6.3"
+
+acorn-jsx@^5.3.2:
+  version "5.3.2"
+
+"acorn@^6.0.0 || ^7.0.0 || ^8.0.0", acorn@^8.16.0:
+  version "8.18.0"
+
+ajv@^6.14.0:
+  version "6.15.0"
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
+append-field@^1.0.0:
+  version "1.0.0"
+
+array-flatten@1.1.1:
+  version "1.1.1"
+
+balanced-match@^4.0.2:
+  version "4.0.4"
+
+baseline-browser-mapping@^2.11.26:
+  version "2.11.27"
+
+body-parser@~1.20.5:
+  version "1.20.8"
+  dependencies:
+    bytes "~3.1.2"
+    content-type "~1.0.5"
+    debug "2.6.9"
+    depd "2.0.0"
+    destroy "~1.2.0"
+    http-errors "~2.0.1"
+    iconv-lite "~0.4.24"
+    on-finished "~2.4.1"
+    qs "~6.16.0"
+    raw-body "~2.5.3"
+    type-is "~1.6.18"
+    unpipe "~1.0.0"
+
+brace-expansion@^5.0.8:
+  version "5.0.12"
+  dependencies:
+    balanced-match "^4.0.2"
+
+browserslist@^4.24.0, "browserslist@>= 4.21.0":
+  version "4.29.3"
+  dependencies:
+    baseline-browser-mapping "^2.11.26"
+    caniuse-lite "^1.0.30001813"
+    electron-to-chromium "^1.5.439"
+    node-releases "^2.0.57"
+    update-browserslist-db "^1.3.3"
+
+busboy@^1.6.0:
+  version "1.6.0"
+  dependencies:
+    streamsearch "^1.1.0"
+
+bytes@~3.1.2:
+  version "3.1.2"
+
+cacheable@^2.5.0:
+  version "2.5.0"
+  dependencies:
+    "@cacheable/memory" "^2.2.0"
+    "@cacheable/utils" "^2.5.0"
+    hookified "^1.15.0"
+    keyv "^5.6.0"
+    qified "^0.10.1"
+
+call-bind-apply-helpers@^1.0.1, call-bind-apply-helpers@^1.0.2:
+  version "1.0.2"
+  dependencies:
+    es-errors "^1.3.0"
+    function-bind "^1.1.2"
+
+call-bound@^1.0.2:
+  version "1.0.4"
+  dependencies:
+    call-bind-apply-helpers "^1.0.2"
+    get-intrinsic "^1.3.0"
+
+caniuse-lite@^1.0.30001813:
+  version "1.0.30001814"
+
+content-disposition@~0.5.4:
+  version "0.5.4"
+  dependencies:
+    safe-buffer "5.2.1"
+
+content-type@~1.0.4, content-type@~1.0.5:
+  version "1.0.5"
+
+convert-source-map@^2.0.0:
+  version "2.0.0"
+
+cookie-signature@~1.0.6:
+  version "1.0.7"
+
+cookie@~0.7.1:
+  version "0.7.2"
+
+cors@^2.8.5:
+  version "2.8.6"
+  dependencies:
+    object-assign "^4"
+    vary "^1"
+
+"crm-app@file:D:\\CRM system\\project\\client-extensions\\meko-crm-app-backup":
+  version "1.0.0"
+  resolved "file:client-extensions/meko-crm-app-backup"
+  dependencies:
+    cors "^2.8.5"
+    express "^4.19.2"
+    multer "^2.4.0"
+    react "^19.3.0"
+    react-dom "^19.3.0"
+
+"crm-kanban-widget@file:D:\\CRM system\\project\\client-extensions\\crm-kanban-widget":
+  version "0.0.0"
+  resolved "file:client-extensions/crm-kanban-widget"
+  dependencies:
+    react "^19.2.8"
+    react-dom "^19.2.8"
+
+cross-spawn@^7.0.6:
+  version "7.0.6"
+  dependencies:
+    path-key "^3.1.0"
+    shebang-command "^2.0.0"
+    which "^2.0.1"
+
+css-box-model@^1.2.1:
+  version "1.2.1"
+  dependencies:
+    tiny-invariant "^1.0.6"
+
+csstype@^3.2.2:
+  version "3.2.3"
+
+debug@^4.1.0, debug@^4.3.1, debug@^4.3.2, debug@^4.4.3:
+  version "4.4.3"
+  dependencies:
+    ms "^2.1.3"
+
+debug@2.6.9:
+  version "2.6.9"
+  dependencies:
+    ms "2.0.0"
+
+deep-is@^0.1.3:
+  version "0.1.4"
+
+depd@~2.0.0, depd@2.0.0:
+  version "2.0.0"
+
+destroy@~1.2.0, destroy@1.2.0:
+  version "1.2.0"
+
+detect-libc@^2.0.3:
+  version "2.1.2"
+
+dunder-proto@^1.0.1:
+  version "1.0.1"
+  dependencies:
+    call-bind-apply-helpers "^1.0.1"
+    es-errors "^1.3.0"
+    gopd "^1.2.0"
+
+ee-first@1.1.1:
+  version "1.1.1"
+
+electron-to-chromium@^1.5.439:
+  version "1.5.444"
+
+encodeurl@~2.0.0:
+  version "2.0.0"
+
+enhanced-resolve@^5.24.1:
+  version "5.26.0"
+  dependencies:
+    graceful-fs "^4.2.4"
+    tapable "^2.3.3"
+
+es-define-property@^1.0.1:
+  version "1.0.1"
+
+es-errors@^1.3.0:
+  version "1.3.0"
+
+es-object-atoms@^1.0.0, es-object-atoms@^1.1.1:
+  version "1.1.2"
+  dependencies:
+    es-errors "^1.3.0"
+
+escalade@^3.2.0:
+  version "3.2.0"
+
+escape-html@~1.0.3:
+  version "1.0.3"
+
+escape-string-regexp@^4.0.0:
+  version "4.0.0"
+
+eslint-plugin-react-hooks@^7.1.1:
+  version "7.1.1"
+  dependencies:
+    "@babel/core" "^7.24.4"
+    "@babel/parser" "^7.24.4"
+    hermes-parser "^0.25.1"
+    zod "^3.25.0 || ^4.0.0"
+    zod-validation-error "^3.5.0 || ^4.0.0"
+
+eslint-plugin-react-refresh@^0.5.6:
+  version "0.5.7"
+
+eslint-scope@^9.1.2:
+  version "9.1.2"
+  dependencies:
+    "@types/esrecurse" "^4.3.1"
+    "@types/estree" "^1.0.8"
+    esrecurse "^4.3.0"
+    estraverse "^5.2.0"
+
+eslint-visitor-keys@^3.4.3:
+  version "3.4.3"
+
+eslint-visitor-keys@^5.0.0, eslint-visitor-keys@^5.0.1:
+  version "5.0.1"
+
+eslint@^10.0.0, eslint@^10.10.0, "eslint@^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0 || ^10.0.0", "eslint@^6.0.0 || ^7.0.0 || >=8.0.0", "eslint@^8.57.0 || ^9.0.0 || ^10.0.0", "eslint@^9 || ^10":
+  version "10.12.0"
+  dependencies:
+    "@eslint-community/eslint-utils" "^4.8.0"
+    "@eslint-community/regexpp" "^4.12.2"
+    "@eslint/config-array" "^0.23.5"
+    "@eslint/config-helpers" "^0.7.0"
+    "@eslint/core" "^1.2.1"
+    "@eslint/plugin-kit" "^0.7.3"
+    "@humanfs/node" "^0.16.6"
+    "@humanwhocodes/module-importer" "^1.0.1"
+    "@humanwhocodes/retry" "^0.4.2"
+    "@types/estree" "^1.0.6"
+    ajv "^6.14.0"
+    cross-spawn "^7.0.6"
+    debug "^4.3.2"
+    escape-string-regexp "^4.0.0"
+    eslint-scope "^9.1.2"
+    eslint-visitor-keys "^5.0.1"
+    espree "^11.2.0"
+    esquery "^1.7.0"
+    esutils "^2.0.2"
+    fast-deep-equal "^3.1.3"
+    file-entry-cache "11.1.5 || >11.1.6 <12"
+    find-up "^5.0.0"
+    glob-parent "^6.0.2"
+    ignore "^5.2.0"
+    imurmurhash "^0.1.4"
+    is-glob "^4.0.0"
+    json-stable-stringify-without-jsonify "^1.0.1"
+    minimatch "^10.2.5"
+    natural-compare "^1.4.0"
+    optionator "^0.9.3"
+
+espree@^11.2.0:
+  version "11.2.0"
+  dependencies:
+    acorn "^8.16.0"
+    acorn-jsx "^5.3.2"
+    eslint-visitor-keys "^5.0.1"
+
+esquery@^1.7.0:
+  version "1.7.0"
+  dependencies:
+    estraverse "^5.1.0"
+
+esrecurse@^4.3.0:
+  version "4.3.0"
+  dependencies:
+    estraverse "^5.2.0"
+
+estraverse@^5.1.0, estraverse@^5.2.0:
+  version "5.3.0"
+
+esutils@^2.0.2:
+  version "2.0.3"
+
+etag@~1.8.1:
+  version "1.8.1"
+
+express@^4.19.2:
+  version "4.22.3"
+  dependencies:
+    accepts "~1.3.8"
+    array-flatten "1.1.1"
+    body-parser "~1.20.5"
+    content-disposition "~0.5.4"
+    content-type "~1.0.4"
+    cookie "~0.7.1"
+    cookie-signature "~1.0.6"
+    debug "2.6.9"
+    depd "2.0.0"
+    encodeurl "~2.0.0"
+    escape-html "~1.0.3"
+    etag "~1.8.1"
+    finalhandler "~1.3.1"
+    fresh "~0.5.2"
+    http-errors "~2.0.0"
+    merge-descriptors "1.0.3"
+    methods "~1.1.2"
+    on-finished "~2.4.1"
+    parseurl "~1.3.3"
+    path-to-regexp "~0.1.13"
+    proxy-addr "~2.0.7"
+    qs "~6.16.0"
+    range-parser "~1.2.1"
+    safe-buffer "5.2.1"
+    send "~0.19.0"
+    serve-static "~1.16.2"
+    setprototypeof "1.2.0"
+    statuses "~2.0.1"
+    type-is "~1.6.18"
+    utils-merge "1.0.1"
+    vary "~1.1.2"
+
+fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
+  version "3.1.3"
+
+fast-json-stable-stringify@^2.0.0:
+  version "2.1.0"
+
+fast-levenshtein@^2.0.6:
+  version "2.0.6"
+
+fdir@^6.5.0:
+  version "6.5.0"
+
+"file-entry-cache@11.1.5 || >11.1.6 <12":
+  version "11.1.5"
+  dependencies:
+    flat-cache "^6.1.23"
+
+finalhandler@~1.3.1:
+  version "1.3.2"
+  dependencies:
+    debug "2.6.9"
+    encodeurl "~2.0.0"
+    escape-html "~1.0.3"
+    on-finished "~2.4.1"
+    parseurl "~1.3.3"
+    statuses "~2.0.2"
+    unpipe "~1.0.0"
+
+find-up@^5.0.0:
+  version "5.0.0"
+  dependencies:
+    locate-path "^6.0.0"
+    path-exists "^4.0.0"
+
+flat-cache@^6.1.23:
+  version "6.1.23"
+  dependencies:
+    cacheable "^2.5.0"
+    flatted "^3.4.2"
+    hookified "^1.15.0"
+
+flatted@^3.4.2:
+  version "3.4.4"
+
+forwarded@0.2.0:
+  version "0.2.0"
+
+fresh@~0.5.2:
+  version "0.5.2"
+
+function-bind@^1.1.2:
+  version "1.1.2"
+
+gensync@^1.0.0-beta.2:
+  version "1.0.0-beta.2"
+
+get-intrinsic@^1.2.5, get-intrinsic@^1.3.0:
+  version "1.3.0"
+  dependencies:
+    call-bind-apply-helpers "^1.0.2"
+    es-define-property "^1.0.1"
+    es-errors "^1.3.0"
+    es-object-atoms "^1.1.1"
+    function-bind "^1.1.2"
+    get-proto "^1.0.1"
+    gopd "^1.2.0"
+    has-symbols "^1.1.0"
+    hasown "^2.0.2"
+    math-intrinsics "^1.1.0"
+
+get-proto@^1.0.1:
+  version "1.0.1"
+  dependencies:
+    dunder-proto "^1.0.1"
+    es-object-atoms "^1.0.0"
+
+glob-parent@^6.0.2:
+  version "6.0.2"
+  dependencies:
+    is-glob "^4.0.3"
+
+globals@^17.12.0:
+  version "17.13.0"
+
+gopd@^1.2.0:
+  version "1.2.0"
+
+graceful-fs@^4.2.4:
+  version "4.2.11"
+
+has-symbols@^1.1.0:
+  version "1.1.0"
+
+hashery@^1.4.0, hashery@^1.5.1:
+  version "1.5.1"
+  dependencies:
+    hookified "^1.15.0"
+
+hasown@^2.0.2:
+  version "2.0.4"
+  dependencies:
+    function-bind "^1.1.2"
+
+hermes-estree@0.25.1:
+  version "0.25.1"
+
+hermes-parser@^0.25.1:
+  version "0.25.1"
+  dependencies:
+    hermes-estree "0.25.1"
+
+hookified@^1.15.0, hookified@^1.15.1:
+  version "1.15.1"
+
+hookified@^2.1.1:
+  version "2.2.0"
+
+http-errors@~2.0.0, http-errors@~2.0.1:
+  version "2.0.1"
+  dependencies:
+    depd "~2.0.0"
+    inherits "~2.0.4"
+    setprototypeof "~1.2.0"
+    statuses "~2.0.2"
+    toidentifier "~1.0.1"
+
+iconv-lite@~0.4.24:
+  version "0.4.24"
+  dependencies:
+    safer-buffer ">= 2.1.2 < 3"
+
+ignore@^5.2.0:
+  version "5.3.2"
+
+ignore@^7.0.5:
+  version "7.0.12"
+
+imurmurhash@^0.1.4:
+  version "0.1.4"
+
+inherits@~2.0.4:
+  version "2.0.4"
+
+ipaddr.js@1.9.1:
+  version "1.9.1"
+
+is-extglob@^2.1.1:
+  version "2.1.1"
+
+is-glob@^4.0.0, is-glob@^4.0.3:
+  version "4.0.3"
+  dependencies:
+    is-extglob "^2.1.1"
+
+isexe@^2.0.0:
+  version "2.0.0"
+
+jiti@*, jiti@^2.7.0, jiti@>=1.21.0:
+  version "2.7.0"
+
+js-tokens@^4.0.0:
+  version "4.0.0"
+
+jsesc@^3.0.2:
+  version "3.1.0"
+
+json-schema-traverse@^0.4.1:
+  version "0.4.1"
+
+json-stable-stringify-without-jsonify@^1.0.1:
+  version "1.0.1"
+
+json5@^2.2.3:
+  version "2.2.3"
+
+keyv@^5.6.0:
+  version "5.6.0"
+  dependencies:
+    "@keyv/serialize" "^1.1.1"
+
+levn@^0.4.1:
+  version "0.4.1"
+  dependencies:
+    prelude-ls "^1.2.1"
+    type-check "~0.4.0"
+
+lightningcss-win32-x64-msvc@1.32.0:
+  version "1.32.0"
+
+lightningcss-win32-x64-msvc@1.33.0:
+  version "1.33.0"
+
+lightningcss@^1.33.0:
+  version "1.33.0"
+  dependencies:
+    detect-libc "^2.0.3"
+  optionalDependencies:
+    lightningcss-android-arm64 "1.33.0"
+    lightningcss-darwin-arm64 "1.33.0"
+    lightningcss-darwin-x64 "1.33.0"
+    lightningcss-freebsd-x64 "1.33.0"
+    lightningcss-linux-arm-gnueabihf "1.33.0"
+    lightningcss-linux-arm64-gnu "1.33.0"
+    lightningcss-linux-arm64-musl "1.33.0"
+    lightningcss-linux-x64-gnu "1.33.0"
+    lightningcss-linux-x64-musl "1.33.0"
+    lightningcss-win32-arm64-msvc "1.33.0"
+    lightningcss-win32-x64-msvc "1.33.0"
+
+lightningcss@1.32.0:
+  version "1.32.0"
+  dependencies:
+    detect-libc "^2.0.3"
+  optionalDependencies:
+    lightningcss-android-arm64 "1.32.0"
+    lightningcss-darwin-arm64 "1.32.0"
+    lightningcss-darwin-x64 "1.32.0"
+    lightningcss-freebsd-x64 "1.32.0"
+    lightningcss-linux-arm-gnueabihf "1.32.0"
+    lightningcss-linux-arm64-gnu "1.32.0"
+    lightningcss-linux-arm64-musl "1.32.0"
+    lightningcss-linux-x64-gnu "1.32.0"
+    lightningcss-linux-x64-musl "1.32.0"
+    lightningcss-win32-arm64-msvc "1.32.0"
+    lightningcss-win32-x64-msvc "1.32.0"
+
+locate-path@^6.0.0:
+  version "6.0.0"
+  dependencies:
+    p-locate "^5.0.0"
+
+lru-cache@^5.1.1:
+  version "5.1.1"
+  dependencies:
+    yallist "^3.0.2"
+
+lucide-react@^1.49.0:
+  version "1.52.0"
+
+magic-string@^0.30.21:
+  version "0.30.21"
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.5.5"
+
+math-intrinsics@^1.1.0:
+  version "1.1.0"
+
+media-typer@0.3.0:
+  version "0.3.0"
+
+"meko-crm-class@file:D:\\CRM system\\project\\client-extensions\\meko-crm-class":
+  version "0.0.0"
+  resolved "file:client-extensions/meko-crm-class"
+  dependencies:
+    react "^19.2.8"
+    react-dom "^19.2.8"
+
+"meko-crm-courses@file:D:\\CRM system\\project\\client-extensions\\meko-crm-courses":
+  version "0.0.0"
+  resolved "file:client-extensions/meko-crm-courses"
+  dependencies:
+    react "^19.2.8"
+    react-dom "^19.2.8"
+
+"meko-crm-form@file:D:\\CRM system\\project\\client-extensions\\meko-crm-form":
+  version "0.0.0"
+  resolved "file:client-extensions/meko-crm-form"
+  dependencies:
+    react "^19.2.8"
+    react-dom "^19.2.8"
+
+"meko-crm-kanban@file:D:\\CRM system\\project\\client-extensions\\meko-crm-kanban":
+  version "0.0.0"
+  resolved "file:client-extensions/meko-crm-kanban"
+  dependencies:
+    "@hello-pangea/dnd" "^18.0.1"
+    lucide-react "^1.49.0"
+    react "^19.2.8"
+    react-dom "^19.2.8"
+
+"meko-crm-portal@file:D:\\CRM system\\project\\client-extensions\\meko-crm-portal":
+  version "0.0.0"
+  resolved "file:client-extensions/meko-crm-portal"
+  dependencies:
+    react "^19.2.8"
+    react-dom "^19.2.8"
+
+"meko-crm-term@file:D:\\CRM system\\project\\client-extensions\\meko-crm-term":
+  version "0.0.0"
+  resolved "file:client-extensions/meko-crm-term"
+  dependencies:
+    react "^19.2.8"
+    react-dom "^19.2.8"
+
+merge-descriptors@1.0.3:
+  version "1.0.3"
+
+methods@~1.1.2:
+  version "1.1.2"
+
+mime-db@1.52.0:
+  version "1.52.0"
+
+mime-types@~2.1.24, mime-types@~2.1.34:
+  version "2.1.35"
+  dependencies:
+    mime-db "1.52.0"
+
+mime@1.6.0:
+  version "1.6.0"
+
+minimatch@^10.2.2, minimatch@^10.2.4, minimatch@^10.2.5:
+  version "10.2.6"
+  dependencies:
+    brace-expansion "^5.0.8"
+
+ms@^2.1.3, ms@2.1.3:
+  version "2.1.3"
+
+ms@2.0.0:
+  version "2.0.0"
+
+multer@^2.4.0:
+  version "2.4.0"
+  dependencies:
+    append-field "^1.0.0"
+    busboy "^1.6.0"
+    type-is "^1.6.18"
+
+nanoid@^3.3.18:
+  version "3.3.19"
+
+natural-compare@^1.4.0:
+  version "1.4.0"
+
+negotiator@0.6.3:
+  version "0.6.3"
+
+node-releases@^2.0.57:
+  version "2.0.57"
+
+object-assign@^4:
+  version "4.1.1"
+
+object-inspect@^1.13.3, object-inspect@^1.13.4:
+  version "1.13.4"
+
+on-finished@~2.4.1:
+  version "2.4.1"
+  dependencies:
+    ee-first "1.1.1"
+
+optionator@^0.9.3:
+  version "0.9.4"
+  dependencies:
+    deep-is "^0.1.3"
+    fast-levenshtein "^2.0.6"
+    levn "^0.4.1"
+    prelude-ls "^1.2.1"
+    type-check "^0.4.0"
+    word-wrap "^1.2.5"
+
+p-limit@^3.0.2:
+  version "3.1.0"
+  dependencies:
+    yocto-queue "^0.1.0"
+
+p-locate@^5.0.0:
+  version "5.0.0"
+  dependencies:
+    p-limit "^3.0.2"
+
+parseurl@~1.3.3:
+  version "1.3.3"
+
+path-exists@^4.0.0:
+  version "4.0.0"
+
+path-key@^3.1.0:
+  version "3.1.1"
+
+path-to-regexp@~0.1.13:
+  version "0.1.13"
+
+picocolors@^1.1.1:
+  version "1.1.1"
+
+"picomatch@^3 || ^4", picomatch@^4.0.4, picomatch@^4.0.7:
+  version "4.0.7"
+
+postcss@^8.5.28:
+  version "8.5.28"
+  dependencies:
+    nanoid "^3.3.18"
+    picocolors "^1.1.1"
+    source-map-js "^1.2.1"
+
+prelude-ls@^1.2.1:
+  version "1.2.1"
+
+proxy-addr@~2.0.7:
+  version "2.0.8"
+  dependencies:
+    forwarded "0.2.0"
+    ipaddr.js "1.9.1"
+
+punycode@^2.1.0:
+  version "2.3.1"
+
+qified@^0.10.1:
+  version "0.10.1"
+  dependencies:
+    hookified "^2.1.1"
+
+qs@~6.16.0:
+  version "6.16.0"
+  dependencies:
+    es-define-property "^1.0.1"
+    side-channel "^1.1.1"
+
+raf-schd@^4.0.3:
+  version "4.0.3"
+
+range-parser@~1.2.1:
+  version "1.2.1"
+
+raw-body@~2.5.3:
+  version "2.5.3"
+  dependencies:
+    bytes "~3.1.2"
+    http-errors "~2.0.1"
+    iconv-lite "~0.4.24"
+    unpipe "~1.0.0"
+
+"react-dom@^18.0.0 || ^19.0.0", react-dom@^19.2.8, react-dom@^19.3.0:
+  version "19.3.0"
+  dependencies:
+    scheduler "^0.28.0"
+
+react-redux@^9.2.0:
+  version "9.3.0"
+  dependencies:
+    "@types/use-sync-external-store" "^0.0.6"
+    use-sync-external-store "^1.4.0"
+
+"react@^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^18.0 || ^19", "react@^18.0.0 || ^19.0.0", react@^19.2.8, react@^19.3.0:
+  version "19.3.0"
+
+redux@^5.0.0, redux@^5.0.1:
+  version "5.0.1"
+
+rolldown@~1.2.11:
+  version "1.2.12"
+  dependencies:
+    "@oxc-project/types" "=0.152.0"
+    "@rolldown/pluginutils" "^1.0.0"
+  optionalDependencies:
+    "@rolldown/binding-android-arm-eabi" "1.2.12"
+    "@rolldown/binding-android-arm64" "1.2.12"
+    "@rolldown/binding-darwin-arm64" "1.2.12"
+    "@rolldown/binding-darwin-x64" "1.2.12"
+    "@rolldown/binding-freebsd-x64" "1.2.12"
+    "@rolldown/binding-linux-arm-gnueabihf" "1.2.12"
+    "@rolldown/binding-linux-arm64-gnu" "1.2.12"
+    "@rolldown/binding-linux-arm64-musl" "1.2.12"
+    "@rolldown/binding-linux-ppc64-gnu" "1.2.12"
+    "@rolldown/binding-linux-s390x-gnu" "1.2.12"
+    "@rolldown/binding-linux-x64-gnu" "1.2.12"
+    "@rolldown/binding-linux-x64-musl" "1.2.12"
+    "@rolldown/binding-openharmony-arm64" "1.2.12"
+    "@rolldown/binding-win32-arm64-msvc" "1.2.12"
+    "@rolldown/binding-win32-x64-msvc" "1.2.12"
+
+safe-buffer@5.2.1:
+  version "5.2.1"
+
+"safer-buffer@>= 2.1.2 < 3":
+  version "2.1.2"
+
+scheduler@^0.28.0:
+  version "0.28.0"
+
+semver@^6.3.1:
+  version "6.3.1"
+
+semver@^7.7.3:
+  version "7.8.5"
+
+send@~0.19.0, send@~0.19.1:
+  version "0.19.2"
+  dependencies:
+    debug "2.6.9"
+    depd "2.0.0"
+    destroy "1.2.0"
+    encodeurl "~2.0.0"
+    escape-html "~1.0.3"
+    etag "~1.8.1"
+    fresh "~0.5.2"
+    http-errors "~2.0.1"
+    mime "1.6.0"
+    ms "2.1.3"
+    on-finished "~2.4.1"
+    range-parser "~1.2.1"
+    statuses "~2.0.2"
+
+serve-static@~1.16.2:
+  version "1.16.3"
+  dependencies:
+    encodeurl "~2.0.0"
+    escape-html "~1.0.3"
+    parseurl "~1.3.3"
+    send "~0.19.1"
+
+setprototypeof@~1.2.0, setprototypeof@1.2.0:
+  version "1.2.0"
+
+shebang-command@^2.0.0:
+  version "2.0.0"
+  dependencies:
+    shebang-regex "^3.0.0"
+
+shebang-regex@^3.0.0:
+  version "3.0.0"
+
+side-channel-list@^1.0.1:
+  version "1.0.1"
+  dependencies:
+    es-errors "^1.3.0"
+    object-inspect "^1.13.4"
+
+side-channel-map@^1.0.1:
+  version "1.0.1"
+  dependencies:
+    call-bound "^1.0.2"
+    es-errors "^1.3.0"
+    get-intrinsic "^1.2.5"
+    object-inspect "^1.13.3"
+
+side-channel-weakmap@^1.0.2:
+  version "1.0.2"
+  dependencies:
+    call-bound "^1.0.2"
+    es-errors "^1.3.0"
+    get-intrinsic "^1.2.5"
+    object-inspect "^1.13.3"
+    side-channel-map "^1.0.1"
+
+side-channel@^1.1.1:
+  version "1.1.1"
+  dependencies:
+    es-errors "^1.3.0"
+    object-inspect "^1.13.4"
+    side-channel-list "^1.0.1"
+    side-channel-map "^1.0.1"
+    side-channel-weakmap "^1.0.2"
+
+source-map-js@^1.2.1:
+  version "1.2.2"
+
+statuses@~2.0.1, statuses@~2.0.2:
+  version "2.0.2"
+
+streamsearch@^1.1.0:
+  version "1.1.0"
+
+tailwindcss@^4.3.3, tailwindcss@4.3.3:
+  version "4.3.3"
+
+tapable@^2.3.3:
+  version "2.3.3"
+
+tiny-invariant@^1.0.6:
+  version "1.3.3"
+
+tinyglobby@^0.2.15, tinyglobby@^0.2.17:
+  version "0.2.17"
+  dependencies:
+    fdir "^6.5.0"
+    picomatch "^4.0.4"
+
+toidentifier@~1.0.1:
+  version "1.0.1"
+
+ts-api-utils@^2.5.0:
+  version "2.5.0"
+
+type-check@^0.4.0, type-check@~0.4.0:
+  version "0.4.0"
+  dependencies:
+    prelude-ls "^1.2.1"
+
+type-is@^1.6.18, type-is@~1.6.18:
+  version "1.6.18"
+  dependencies:
+    media-typer "0.3.0"
+    mime-types "~2.1.24"
+
+typescript-eslint@^8.69.0:
+  version "8.71.0"
+  dependencies:
+    "@typescript-eslint/eslint-plugin" "8.71.0"
+    "@typescript-eslint/parser" "8.71.0"
+    "@typescript-eslint/typescript-estree" "8.71.0"
+    "@typescript-eslint/utils" "8.71.0"
+
+typescript@^7.0.2:
+  version "7.0.2"
+  optionalDependencies:
+    "@typescript/typescript-aix-ppc64" "7.0.2"
+    "@typescript/typescript-darwin-arm64" "7.0.2"
+    "@typescript/typescript-darwin-x64" "7.0.2"
+    "@typescript/typescript-freebsd-arm64" "7.0.2"
+    "@typescript/typescript-freebsd-x64" "7.0.2"
+    "@typescript/typescript-linux-arm" "7.0.2"
+    "@typescript/typescript-linux-arm64" "7.0.2"
+    "@typescript/typescript-linux-loong64" "7.0.2"
+    "@typescript/typescript-linux-mips64el" "7.0.2"
+    "@typescript/typescript-linux-ppc64" "7.0.2"
+    "@typescript/typescript-linux-riscv64" "7.0.2"
+    "@typescript/typescript-linux-s390x" "7.0.2"
+    "@typescript/typescript-linux-x64" "7.0.2"
+    "@typescript/typescript-netbsd-arm64" "7.0.2"
+    "@typescript/typescript-netbsd-x64" "7.0.2"
+    "@typescript/typescript-openbsd-arm64" "7.0.2"
+    "@typescript/typescript-openbsd-x64" "7.0.2"
+    "@typescript/typescript-sunos-x64" "7.0.2"
+    "@typescript/typescript-win32-arm64" "7.0.2"
+    "@typescript/typescript-win32-x64" "7.0.2"
+
+typescript@>=4.8.4, "typescript@>=4.8.4 <6.1.0", typescript@~6.0.2:
+  version "6.0.3"
+
+"undici-types@>=7.24.0 <7.24.7":
+  version "7.24.6"
+
+unpipe@~1.0.0:
+  version "1.0.0"
+
+update-browserslist-db@^1.3.3:
+  version "1.3.3"
+  dependencies:
+    escalade "^3.2.0"
+    picocolors "^1.1.1"
+
+uri-js@^4.2.2:
+  version "4.4.1"
+  dependencies:
+    punycode "^2.1.0"
+
+use-sync-external-store@^1.4.0:
+  version "1.7.0"
+
+utils-merge@1.0.1:
+  version "1.0.1"
+
+vary@^1, vary@~1.1.2:
+  version "1.1.2"
+
+"vite@^5.2.0 || ^6 || ^7 || ^8", vite@^8.0.0, vite@^8.3.0, vite@^8.3.1:
+  version "8.3.2"
+  dependencies:
+    lightningcss "^1.33.0"
+    picomatch "^4.0.7"
+    postcss "^8.5.28"
+    rolldown "~1.2.11"
+    tinyglobby "^0.2.17"
+  optionalDependencies:
+    fsevents "~2.3.3"
+
+which@^2.0.1:
+  version "2.0.2"
+  dependencies:
+    isexe "^2.0.0"
+
+word-wrap@^1.2.5:
+  version "1.2.5"
+
+yallist@^3.0.2:
+  version "3.1.1"
+
+yocto-queue@^0.1.0:
+  version "0.1.0"
+
+"zod-validation-error@^3.5.0 || ^4.0.0":
+  version "4.0.2"
+
+"zod@^3.25.0 || ^4.0.0":
+  version "4.6.5"

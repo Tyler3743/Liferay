@@ -1,4 +1,4 @@
-﻿services:
+services:
   database:
     image: postgres:15-alpine
     container_name: crm_postgres
@@ -34,6 +34,7 @@
     volumes:
       - ./liferay-data:/opt/liferay/data
       - ./files/portal-ext.properties:/opt/liferay/portal-ext.properties:ro
+      - ../bundles/osgi/client-extensions:/opt/liferay/osgi/client-extensions
     networks:
       - crm-net
 

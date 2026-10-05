@@ -1,28 +1,26 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
 import './index.css'
+import App from './App.tsx'
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
   createRoot(rootElement).render(
-    <React.StrictMode>
+    <StrictMode>
       <App />
-    </React.StrictMode>,
+    </StrictMode>,
   )
 } else {
-  // Liferay Custom Element fallback handling if needed
-  class MekoCrmPortal extends HTMLElement {
+  class CustomElement extends HTMLElement {
     connectedCallback() {
       createRoot(this).render(
-        <React.StrictMode>
+        <StrictMode>
           <App />
-        </React.StrictMode>
+        </StrictMode>
       );
     }
   }
-  
   if (!customElements.get('meko-crm-portal')) {
-    customElements.define('meko-crm-portal', MekoCrmPortal);
+    customElements.define('meko-crm-portal', CustomElement);
   }
 }

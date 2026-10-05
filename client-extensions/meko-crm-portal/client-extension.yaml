@@ -8,7 +8,7 @@ meko-crm-portal:
   friendlyURLMapping: meko-crm-portal
   htmlElementName: meko-crm-portal
   instanceable: true
-  name: Meko CRM - Cổng Điều Hướng
+  name: Meko CRM - Portal
   portletCategoryName: category.client-extensions
   type: customElement
   urls:

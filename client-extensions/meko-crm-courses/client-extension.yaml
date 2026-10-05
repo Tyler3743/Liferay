@@ -8,7 +8,7 @@ meko-crm-courses:
   friendlyURLMapping: meko-crm-courses
   htmlElementName: meko-crm-courses
   instanceable: true
-  name: Meko CRM - Quản Lý Khóa Học
+  name: Meko CRM - Course Management
   portletCategoryName: category.client-extensions
   type: customElement
   urls:

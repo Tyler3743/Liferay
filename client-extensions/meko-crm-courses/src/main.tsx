@@ -3,8 +3,24 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  createRoot(rootElement).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+} else {
+  class CustomElement extends HTMLElement {
+    connectedCallback() {
+      createRoot(this).render(
+        <StrictMode>
+          <App />
+        </StrictMode>
+      );
+    }
+  }
+  if (!customElements.get('meko-crm-courses')) {
+    customElements.define('meko-crm-courses', CustomElement);
+  }
+}

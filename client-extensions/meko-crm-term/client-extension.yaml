@@ -8,7 +8,7 @@ meko-crm-term:
   friendlyURLMapping: meko-crm-term
   htmlElementName: meko-crm-term
   instanceable: true
-  name: Meko CRM - Quản Lý Học Kỳ / Niên Khóa
+  name: Meko CRM - Term Management
   portletCategoryName: category.client-extensions
   type: customElement
   urls:

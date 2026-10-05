@@ -1,4 +1,4 @@
-assemble:
+﻿assemble:
   - from: dist
     into: static
 
@@ -8,7 +8,7 @@ meko-crm-kanban:
   friendlyURLMapping: meko-crm-kanban
   htmlElementName: meko-crm-kanban
   instanceable: true
-  name: Meko CRM - Phễu Tuyển Sinh
+  name: meko-crm-kanban
   portletCategoryName: category.client-extensions
   type: customElement
   urls:

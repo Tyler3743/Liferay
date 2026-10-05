@@ -8,7 +8,7 @@ meko-crm-form:
   friendlyURLMapping: meko-crm-form
   htmlElementName: meko-crm-form
   instanceable: true
-  name: Meko CRM - Form Đăng Ký Tư Vấn
+  name: Meko CRM - Registration Form
   portletCategoryName: category.client-extensions
   type: customElement
   urls:
