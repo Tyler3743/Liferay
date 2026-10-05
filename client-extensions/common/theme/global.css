@@ -3,6 +3,7 @@
    ⚠️  CHỈ SỬA FILE NÀY — Các dự án meko-crm-* chỉ @import file này
    ========================================================================== */
 @import "tailwindcss";
+@source "../components";
 
 @theme {
   /* ---------- Brand Colors ---------- */
