@@ -10,7 +10,12 @@ giao diện Form đăng ký tư vấn/tuyển sinh:
 ------------------
 
 .\gradlew build
+
+
 scp client-extensions/*/dist/*.zip ubuntu@192.168.1.250:/home/ubuntu/
+
+
+
 ssh ubuntu@192.168.1.250
 
 sudo cp /home/ubuntu/*.zip /opt/app/liferay-portal/deploy/ && sudo chown ubuntu:ubuntu /opt/app/liferay-portal/deploy/*.zip
