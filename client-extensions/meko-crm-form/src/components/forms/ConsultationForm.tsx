@@ -123,37 +123,43 @@ export const ConsultationForm: React.FC<Props> = ({ config = defaultFormConfig }
           {/* Chọn khung giờ rảnh */}
           <div>
             <label className="text-sm font-semibold text-gray-900 block mb-1">{config.labels.freeTime}</label>
-            <div className="border border-gray-300 rounded-md p-4 space-y-3 bg-white max-h-60 overflow-y-auto">
+            <div className="border border-gray-200 rounded-[20px] p-4 sm:p-5 space-y-3 sm:space-y-4 bg-white max-h-[420px] overflow-y-auto">
               {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map(day => {
                 const data = schedule[day];
                 return (
-                  <div key={day} className="flex items-center space-x-4">
-                    <label className="flex items-center space-x-2 cursor-pointer w-16 shrink-0">
+                  <div key={day} className="flex items-center gap-3 sm:gap-4 w-full">
+                    <label className="flex items-center gap-3 cursor-pointer shrink-0 !mb-0">
                       <input
                         type="checkbox"
                         checked={data.enabled}
                         onChange={(e) => updateSchedule(day, 'enabled', e.target.checked)}
-                        className="rounded border-gray-300 text-brand-primary focus:ring-brand-primary"
+                        className="w-5 h-5 rounded border-2 border-gray-300 text-brand-primary focus:ring-brand-primary"
                       />
-                      <span className="text-sm text-gray-700 font-medium">{day}</span>
+                      <span className="text-xl sm:text-2xl font-bold text-gray-800 w-10 sm:w-12">{day}</span>
                     </label>
 
-                    <div className={`flex items-center justify-end space-x-2 flex-1 transition-opacity ${data.enabled ? 'opacity-100' : 'opacity-40 pointer-events-none'}`}>
-                      <input
-                        type="time"
-                        value={data.from}
-                        onChange={(e) => updateSchedule(day, 'from', e.target.value)}
-                        disabled={!data.enabled}
-                        className="border border-gray-300 rounded-md p-1.5 text-sm outline-none focus:border-brand-primary bg-white disabled:bg-gray-100"
-                      />
-                      <span className="text-gray-500 text-sm">—</span>
-                      <input
-                        type="time"
-                        value={data.to}
-                        onChange={(e) => updateSchedule(day, 'to', e.target.value)}
-                        disabled={!data.enabled}
-                        className="border border-gray-300 rounded-md p-1.5 text-sm outline-none focus:border-brand-primary bg-white disabled:bg-gray-100"
-                      />
+                    <div className={`flex items-center flex-1 gap-2 sm:gap-3 transition-opacity ${data.enabled ? 'opacity-100' : 'opacity-40 pointer-events-none'}`}>
+                      <div className="relative flex-1">
+                        <input
+                          type="time"
+                          value={data.from}
+                          onChange={(e) => updateSchedule(day, 'from', e.target.value)}
+                          disabled={!data.enabled}
+                          placeholder="-- : -- --"
+                          className="w-full h-14 sm:h-16 border-2 border-gray-300 rounded-2xl px-3 sm:px-4 text-center text-xl sm:text-2xl font-mono tracking-widest text-gray-700 outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white disabled:bg-gray-50 appearance-none"
+                        />
+                      </div>
+                      <span className="text-gray-400 text-2xl sm:text-3xl font-light flex-shrink-0 select-none">—</span>
+                      <div className="relative flex-1">
+                        <input
+                          type="time"
+                          value={data.to}
+                          onChange={(e) => updateSchedule(day, 'to', e.target.value)}
+                          disabled={!data.enabled}
+                          placeholder="-- : -- --"
+                          className="w-full h-14 sm:h-16 border-2 border-gray-300 rounded-2xl px-3 sm:px-4 text-center text-xl sm:text-2xl font-mono tracking-widest text-gray-700 outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 bg-white disabled:bg-gray-50 appearance-none"
+                        />
+                      </div>
                     </div>
                   </div>
                 );
