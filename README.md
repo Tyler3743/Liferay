@@ -7,5 +7,12 @@ giao diện Form đăng ký tư vấn/tuyển sinh:
 . Làm hiệu ứng tương tác UX (trạng thái loading khi ấn gửi, thông báo popup thành công / thất bại).
 . Gắn dữ liệu mẫu (Mock data) gửi thử theo đúng định dạng JSON đã thống nhất (chưa có API thật, chạy test trước).
 
+------------------
+
+.\gradlew build
+scp client-extensions/*/dist/*.zip ubuntu@192.168.1.250:/home/ubuntu/
+ssh ubuntu@192.168.1.250
+
+sudo cp /home/ubuntu/*.zip /opt/app/liferay-portal/deploy/ && sudo chown ubuntu:ubuntu /opt/app/liferay-portal/deploy/*.zip
 
 
