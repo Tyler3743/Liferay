@@ -1,10 +1,8 @@
 import { LandingPage } from './pages/LandingPage';
-import { Header } from '../../common/components/Header.tsx';
 
 function App() {
   return (
-    <div className="min-h-screen bg-app-bg">
-      <Header />
+    <div className="min-h-screen bg-surface-app-bg">
       <main>
         <LandingPage />
       </main>
