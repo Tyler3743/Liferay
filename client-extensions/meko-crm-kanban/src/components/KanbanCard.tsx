@@ -43,12 +43,12 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
               </span>
               {card.status && (
                 <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${card.status === 'Chưa phân công' ? 'bg-indigo-100 text-indigo-800' :
-                    card.status === 'Mới' ? 'bg-blue-100 text-blue-800' :
-                      card.status === 'Đang tư vấn' ? 'bg-amber-100 text-amber-800' :
-                        card.status === 'Chờ cọc' ? 'bg-yellow-100 text-yellow-800' :
-                          card.status === 'Đã cọc' ? 'bg-orange-100 text-orange-800' :
-                            card.status === 'Hoàn thành' ? 'bg-emerald-100 text-emerald-800' :
-                              'bg-gray-100 text-gray-700'
+                  card.status === 'Mới' ? 'bg-blue-100 text-blue-800' :
+                    card.status === 'Đang tư vấn' ? 'bg-amber-100 text-amber-800' :
+                      card.status === 'Chờ cọc' ? 'bg-yellow-100 text-yellow-800' :
+                        card.status === 'Đã cọc' ? 'bg-orange-100 text-orange-800' :
+                          card.status === 'Hoàn thành' ? 'bg-emerald-100 text-emerald-800' :
+                            'bg-gray-100 text-gray-700'
                   }`}>
                   {card.status}
                 </span>
@@ -108,10 +108,10 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
           {/* Deal info */}
           {card.deal && (
             <div className={`text-xs font-bold px-2 py-1 rounded-md flex items-center justify-between ${card.deal.status === 'Đã cọc'
-                ? 'bg-orange-100 text-orange-800 border border-orange-200'
-                : card.deal.status === 'Hoàn thành'
-                  ? 'bg-green-100 text-green-800 border border-green-200'
-                  : 'bg-yellow-100 text-yellow-800 border border-yellow-200'
+              ? 'bg-orange-100 text-orange-800 border border-orange-200'
+              : card.deal.status === 'Hoàn thành'
+                ? 'bg-green-100 text-green-800 border border-green-200'
+                : 'bg-yellow-100 text-yellow-800 border border-yellow-200'
               }`}>
               <span>💰 Deal: {card.deal.amount}</span>
               <span className="text-[10px] uppercase tracking-wider">{card.deal.status}</span>
@@ -130,7 +130,6 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
             {!card.assignedTo ? (
               <button
                 type="button"
-                style={{ backgroundColor: '#7c3aed', color: '#ffffff' }}
                 onPointerDown={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
                 onClick={(e) => {
@@ -138,7 +137,7 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
                   if (onAssignClick) onAssignClick(card);
                   else onClick(card);
                 }}
-                className="flex-1 py-1.5 px-2 hover:opacity-90 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 shadow-xs transition cursor-pointer"
+                className="bg-brand-primary flex-1 py-1.5 px-2 hover:opacity-90 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 shadow-xs transition cursor-pointer text-white"
               >
                 <UserCheck className="w-3.5 h-3.5 text-white" />
                 <span>Phân công</span>

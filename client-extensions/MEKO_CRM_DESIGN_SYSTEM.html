@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[Meko CRM] Interactive Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@400;700&family=Montserrat:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Global Theme Variables */
+      --primary-500: #DC2626;
+      --primary-600: #B91C1C;
+      --secondary-color: #1A365D;
+      
+      /* Semantic Colors */
+      --color-success: #10B981;
+      --color-warning: #F59E0B;
+      --color-error: #EF4444;
+
+      --base-font-family: 'Inter', -apple-system, sans-serif;
+      --base-font-size: 16px;
+      --spacing-scale: 1;
+
+      /* Specific Typography */
+      --h1-size: 1.875em;
+      --h2-size: 1.5em;
+      --body-size: 1em;
+
+      /* Specific Radius */
+      --radius-sm: 5px;
+      --radius-md: 10px;
+      --radius-lg: 4px;
+      --radius-xl: 6px;
+
+      /* Component Colors */
+      --comp-bg: #FFFFFF;
+      --comp-border: #E2E8F0;
+      --comp-text-main: #0F172A;
+      --comp-text-sub: #475569;
+      --comp-btn-red: #DC2626;
+      --comp-btn-blue: #2563EB;
+      --comp-btn-purple: #8B5CF6;
+      --comp-tag-blue-bg: #EFF6FF;
+      --comp-tag-blue-text: #2563EB;
+      --comp-tag-warn-bg: #FFFBEB;
+      --comp-tag-warn-text: #D97706;
+
+      /* Static Constants */
+      --bg-workspace: #F8F9FC;
+      --bg-doc: #FFFFFF;
+      --text-main: #0F172A;
+      --text-sub: #475569;
+      --border-color: #E2E8F0;
+      --border-light: #F1F5F9;
+
+      /* =========== PER-COMPONENT OVERRIDE VARS (Dynamic) =========== */
+      /* --- CARD --- */
+      --card-title-fs: 14px;
+      --card-title-fw: 800;
+      --card-radius: 12px;
+      --card-padding: 16px;
+      --card-width: 280px;
+      --icon-assign-btn: '👤';
+      --icon-class-btn: '📚';
+      --icon-deal-btn: '💲';
+      --icon-detail-btn: '👁';
+
+      /* --- COLUMN --- */
+      --col-title-fs: 14px;
+      --col-title-color: #1F2937;
+      --col-bg: #F8FAFC;
+      --col-border: #E2E8F0;
+      --col-header-bar: #3b82f6;
+      --col-width: 320px;
+      --col-radius: 6px;
+      --col-padding: 12px;
+
+      /* --- DRAWER (Detail Form V2 - Full Modal Drawer) --- */
+      --drawer-title-fs: 20px;
+      --drawer-title-fw: 800;
+      --drawer-bg: #FFFFFF;
+      --drawer-sec-blue: #60a5fa;
+      --drawer-sec-purple: #8B5CF6;
+      --drawer-sec-red: #DC2626;
+      --drawer-width: 540px;
+      --drawer-radius: 12px;
+      --drawer-padding: 16px;
+
+      /* --- ASSIGN MODAL --- */
+      --am-title-fs: 16px;
+      --am-text: #0F172A;
+      --am-bg: #FFFFFF;
+      --am-border: #E2E8F0;
+      --am-primary: #8B5CF6;
+      --am-info-bg: #f5f3ff;
+      --am-radius: 16px;
+      --am-padding: 24px;
+
+      /* --- CLASS MODAL --- */
+      --cm-title-fs: 18px;
+      --cm-text: #0F172A;
+      --cm-bg: #FFFFFF;
+      --cm-th-bg: #F3F4F6;
+      --cm-row-hover: #EFF6FF;
+      --cm-primary: #2563EB;
+      --cm-radius: 16px;
+      --cm-padding: 24px;
+
+      /* --- DEAL MODAL --- */
+      --dm-title-fs: 16px;
+      --dm-text: #0F172A;
+      --dm-bg: #FFFFFF;
+      --dm-header: #DC2626;
+      --dm-primary: #DC2626;
+      --dm-info-bg: #fef2f2;
+      --dm-radius: 16px;
+      --dm-padding: 24px;
+
+      /* --- COMPLETE MODAL --- */
+      --com-title-fs: 16px;
+      --com-text: #0F172A;
+      --com-bg: #FFFFFF;
+      --com-header: #059669;
+      --com-primary: #059669;
+      --com-info-bg: #ecfdf5;
+      --com-radius: 16px;
+      --com-padding: 24px;
+
+      /* --- LEADS TABLE --- */
+      --lt-cell-fs: 12px;
+      --lt-text: #1F2937;
+      --lt-th-text: #4B5563;
+      --lt-th-bg: #F9FAFB;
+      --lt-bg: #FFFFFF;
+      --lt-border: #E5E7EB;
+      --lt-row-hover: #F9FAFB;
+      --lt-padding: 14px;
+      --lt-radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--base-font-family);
+      font-size: var(--base-font-size);
+      background-color: var(--bg-workspace);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      transition: all 0.2s ease;
+    }
+
+    /* Top Toolbar */
+    .top-toolbar {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      gap: 32px;
+    }
+    .doc-brand-title { font-size: 18px; font-weight: 800; color: var(--text-main); font-family: var(--base-font-family);}
+    .doc-brand-title span:first-child { color: var(--secondary-color); }
+    .doc-brand-title span:last-child { color: var(--primary-500); }
+
+    /* Tabs Navigation */
+    .tab-nav { display: flex; gap: 8px; }
+    .tab-btn { padding: 8px 16px; border: none; background: transparent; font-family: inherit; font-size: 0.9em; font-weight: 600; color: var(--text-sub); cursor: pointer; border-radius: var(--radius-md); transition: all 0.2s; }
+    .tab-btn:hover { background: var(--bg-workspace); color: var(--text-main); }
+    .tab-btn.active { background: var(--primary-500); color: #FFF; }
+
+    /* Tab Content Wrapper */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Layout */
+    .workspace-layout { max-width: 1050px; margin: 30px auto 30px 40px; padding: 0 20px; }
+    .doc-main-canvas {
+      background: var(--bg-doc);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      padding: 50px 60px;
+      transition: all 0.2s ease;
+    }
+
+    .doc-title-h1 { font-size: 1.625em; font-weight: 800; text-transform: uppercase; text-align: center; margin-bottom: 8px; }
+    .doc-subtitle-lead { font-size: 0.875em; color: var(--text-sub); text-align: center; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 2px solid var(--border-light); }
+    .part-title { font-size: 1.25em; font-weight: 800; color: var(--primary-500); text-transform: uppercase; margin: 40px 0 20px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-500); }
+    
+    .section-title { font-size: 1em; font-weight: 700; margin: 24px 0 12px; display: flex; justify-content: space-between; align-items: center;}
+    
+    .spec-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.875em; }
+    .spec-table th { background: var(--primary-500); color: #FFF; padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.8em; text-transform: uppercase; border: 1px solid var(--primary-600); }
+    .spec-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: middle; }
+    .spec-table tr:nth-child(even) td { background: #F8FAFC; }
+
+    /* Swatches */
+    .color-swatch-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+    .color-swatch-item { border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 120px; text-align: center; }
+    .swatch-info { padding: 8px; }
+    .swatch-label { font-size: 0.8em; font-weight: 700; margin-bottom: 2px; }
+    .swatch-hex { font-size: 0.7em; color: var(--text-sub); font-family: monospace; }
+
+    /* Interactive Inputs */
+    .inline-input { padding: 6px 8px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.9em; width: 80px; font-family: monospace; }
+    .text-preview-input { width: 100%; padding: 10px; border: 1px solid var(--primary-500); border-radius: 6px; font-size: 1em; margin-bottom: 16px; font-family: var(--base-font-family); }
+    
+    .preview-box { background: #F8FAFC; padding: calc(12px * var(--spacing-scale)); border-radius: var(--radius-md); border: 1px dashed var(--border-color); font-weight: inherit; font-size: inherit; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+    
+    /* Spacing Visual Box */
+    .spacing-grid-strip { display: flex; gap: 16px; background: #FAFAFA; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 20px; justify-content: space-around; margin: 16px 0; }
+    .spacing-box-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .spacing-visual-box { background: #FEE2E2; border: 1px dashed var(--primary-500); display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;}
+    .spacing-visual-inner { background: var(--primary-500); transition: all 0.2s ease;}
+    .spacing-px-tag { font-size: 0.8em; font-weight: 700; color: var(--primary-500); }
+
+    .radius-preview-box { background: var(--primary-500); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; color: white; font-size: 13px; font-weight: bold; margin: 0 auto; transition: border-radius 0.2s ease;}
+
+    /* Global Controller */
+    .theme-controller {
+      position: fixed;
+      right: 20px;
+      top: 80px;
+      width: 280px;
+      background: #FFFFFF;
+      border: 1px solid var(--primary-500);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      padding: 20px;
+      z-index: 1000;
+    }
+    .theme-controller h3 { margin-bottom: 16px; font-size: 1.05em; border-bottom: 1px solid var(--border-light); padding-bottom: 10px;}
+    .control-group { margin-bottom: 14px; }
+    .control-group label { display: flex; justify-content: space-between; font-size: 0.8em; font-weight: 600; margin-bottom: 4px; color: var(--text-main); }
+    .control-group input[type="color"] { width: 100%; height: 32px; border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; padding: 2px;}
+    .control-group select, .control-group input[type="number"] { width: 100%; padding: 6px 8px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85em; outline: none; }
+
+
+    /* ---- COMPONENT BUILDER STYLES ---- */
+    .builder-container { display: grid; grid-template-columns: 320px 1fr; gap: 24px; margin-top: 16px; align-items: start;}
+    .ctrl-panel { background: #FFF; padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color); position: sticky; top: 100px; }
+    .ctrl-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85em; font-weight: 600; color: var(--text-main); }
+    .ctrl-row input[type="color"] { width: 32px; height: 28px; border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer; padding: 0;}
+
+    /* C1: Student Card (Thẻ Học Viên) */
+    .c1-card { border: 1px solid var(--comp-border); border-radius: var(--radius-lg); padding: calc(16px * var(--spacing-scale)); background: var(--comp-bg); box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: calc(10px * var(--spacing-scale)); width: 100%; transition: all 0.2s ease;}
+    .c1-header { display: flex; justify-content: space-between; align-items: center; }
+    .c1-title { font-size: 1.1em; font-weight: 800; color: var(--comp-text-main); }
+    .c1-badge-id { font-size: 0.7em; background: #F3F4F6; color: var(--comp-text-sub); padding: 4px 8px; border-radius: var(--radius-sm); font-weight: 600; border: 1px solid #E5E7EB; }
+    .c1-row-info { display: flex; gap: 16px; font-size: 0.8em; color: var(--comp-text-sub); }
+    .c1-icon-text { display: flex; align-items: center; gap: 4px; }
+    
+    .c1-tag-group { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+    .c1-tag-blue { background: var(--comp-tag-blue-bg); color: var(--comp-tag-blue-text); font-weight: 700; font-size: 0.75em; padding: 4px 10px; border-radius: var(--radius-sm); }
+    .c1-tag-warn { background: var(--comp-tag-warn-bg); color: var(--comp-tag-warn-text); font-weight: 600; font-size: 0.8em; padding: 4px 10px; border-radius: var(--radius-sm); border: 1px solid #FDE68A; display: flex; align-items: center; gap: 4px;}
+    
+    .c1-btn-group { display: flex; gap: 12px; margin-top: 8px; }
+    .c1-btn-primary { flex: 2; padding: calc(10px * var(--spacing-scale)); background: var(--comp-btn-red); color: white; border: none; border-radius: var(--radius-md); font-weight: 700; font-size: 0.85em; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .c1-btn-secondary { flex: 1; padding: calc(10px * var(--spacing-scale)); background: transparent; color: var(--comp-text-main); border: 1px solid var(--comp-border); border-radius: var(--radius-md); font-weight: 700; font-size: 0.85em; cursor: pointer; }
+
+    /* C2: Detail Form (Khung Chi Tiết) */
+    .c2-card { border: 1px solid var(--comp-border); border-radius: var(--radius-lg); background: var(--comp-bg); box-shadow: 0 4px 12px rgba(0,0,0,0.06); width: 100%; max-width: 480px; display: flex; flex-direction: column; overflow: hidden; }
+    .c2-header { padding: calc(16px * var(--spacing-scale)); border-bottom: 1px solid var(--border-light); background: #FAFAFA; display: flex; align-items: flex-start; gap: 12px;}
+    .c2-avatar-placeholder { width: 32px; height: 32px; border-radius: 50%; background: #E2E8F0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-sub); cursor:pointer;}
+    .c2-head-title { font-size: 1.1em; font-weight: 800; color: var(--comp-text-main); margin-bottom: 4px; display: flex; align-items: center; gap: 8px;}
+    .c2-head-sub { font-size: 0.75em; color: var(--comp-text-sub); display: flex; align-items: center; gap: 6px;}
+
+    .c2-body { padding: calc(16px * var(--spacing-scale)); display: flex; flex-direction: column; gap: calc(16px * var(--spacing-scale)); }
+    
+    .c2-section { border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: calc(12px * var(--spacing-scale)); position: relative; }
+    .c2-sec-blue { border-color: #BFDBFE; }
+    .c2-sec-purple { border-color: #E9D5FF; }
+    .c2-sec-red { border-color: #FECACA; }
+    
+    .c2-sec-title { font-size: 0.8em; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .c2-text-blue { color: #1D4ED8; }
+    .c2-text-purple { color: #6D28D9; }
+    .c2-text-red { color: #B91C1C; }
+
+    .c2-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .c2-info-item { font-size: 0.75em; }
+    .c2-info-label { color: var(--comp-text-sub); margin-bottom: 2px; }
+    .c2-info-val { color: var(--comp-text-main); font-weight: 600; }
+
+    .c2-input { width: 100%; border: 1px solid var(--comp-border); border-radius: var(--radius-md); padding: 8px 12px; font-size: 0.85em; font-family: inherit; margin-top: 4px;}
+    
+    .c2-btn-full { width: 100%; padding: 10px; border-radius: var(--radius-md); border: none; font-weight: 700; font-size: 0.85em; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; color: white;}
+    .bg-purple { background: var(--comp-btn-purple); }
+    .bg-blue { background: var(--comp-btn-blue); }
+    .bg-red { background: var(--comp-btn-red); }
+
+    /* ---- KANBAN PREVIEW TAB STYLES ---- */
+    .kanban-layout { background: #EEF2F6; border-radius: var(--radius-lg); padding: calc(24px * var(--spacing-scale)); border: 1px solid var(--border-color); overflow-x: auto; min-height: 80vh;}
+    .kanban-board-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .kanban-board-title { font-size: 1.5em; font-weight: 800; color: var(--text-main); }
+    .kanban-board-actions { display: flex; gap: 12px; }
+    .btn-create-deal { background: var(--primary-500); color: white; border: none; padding: 10px 20px; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; }
+    
+    .kanban-columns { display: flex; gap: 24px; align-items: flex-start; }
+    .kanban-col { width: 320px; min-width: 320px; background: #F8FAFC; border-radius: var(--radius-lg); padding: calc(16px * var(--spacing-scale)); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 16px; }
+    .kanban-col-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 0.9em; padding-bottom: 12px; border-bottom: 2px solid var(--border-light); }
+    .kanban-col-count { background: #E2E8F0; padding: 2px 8px; border-radius: var(--radius-md); font-size: 0.8em; }
+
+    /* ========== NEW: CARD USES PER-COMPONENT VARS ========== */
+    .ds-card {
+      border: 1px solid var(--comp-border);
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      background: var(--comp-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: var(--card-width);
+      transition: all 0.2s ease;
+      max-width: 100%;
+    }
+    .ds-card-title {
+      font-size: var(--card-title-fs);
+      font-weight: var(--card-title-fw);
+      color: var(--comp-text-main);
+    }
+
+    /* ========== NEW: KANBAN COLUMN PER-COMPONENT VARS ========== */
+    .ds-col {
+      width: var(--col-width);
+      min-width: var(--col-width);
+      background: var(--col-bg);
+      border-radius: var(--col-radius);
+      padding: var(--col-padding);
+      border: 1px solid var(--col-border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+    .ds-col-header {
+      display: flex; justify-content: space-between; align-items: center;
+      font-weight: 700; font-size: var(--col-title-fs); color: var(--col-title-color);
+      padding: 8px 10px;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--col-header-bar) 12%, transparent) 0%, transparent 100%);
+      border-left: 3px solid var(--col-header-bar);
+      border-radius: 6px;
+    }
+
+    /* ========== NEW: DRAWER V2 (Full Card Detail Drawer) ========== */
+    .ds-drawer {
+      background: var(--drawer-bg);
+      width: var(--drawer-width);
+      max-width: 100%;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+      display: flex;
+      flex-direction: column;
+    }
+    .ds-drawer-head {
+      padding: 20px 24px 18px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .ds-drawer-title { font-size: var(--drawer-title-fs); font-weight: var(--drawer-title-fw); color: var(--text-main); }
+    .ds-drawer-body { padding: var(--drawer-padding); display: flex; flex-direction: column; gap: 16px; }
+    .ds-drawer-sec {
+      border-radius: var(--drawer-radius);
+      padding: var(--drawer-padding);
+      border: 1px solid;
+    }
+    .ds-drawer-sec.sec-blue { border-color: color-mix(in srgb, var(--drawer-sec-blue) 50%, transparent); background: color-mix(in srgb, var(--drawer-sec-blue) 8%, #fff); }
+    .ds-drawer-sec.sec-purple { border-color: color-mix(in srgb, var(--drawer-sec-purple) 50%, transparent); background: color-mix(in srgb, var(--drawer-sec-purple) 8%, #fff); }
+    .ds-drawer-sec.sec-red { border-color: color-mix(in srgb, var(--drawer-sec-red) 50%, transparent); background: color-mix(in srgb, var(--drawer-sec-red) 8%, #fff); }
+    .ds-drawer-sec-title {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .sec-blue .ds-drawer-sec-title { color: var(--drawer-sec-blue); }
+    .sec-purple .ds-drawer-sec-title { color: var(--drawer-sec-purple); }
+    .sec-red .ds-drawer-sec-title { color: var(--drawer-sec-red); }
+
+    /* ========== NEW: 4 MODALS ========== */
+    .ds-modal-shell {
+      background: var(--modal-bg, var(--bg-workspace));
+      border-radius: 18px;
+      padding: 40px 20px;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 420px;
+    }
+    .ds-modal {
+      background: var(--m-bg, #fff);
+      border-radius: var(--m-radius, 16px);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28);
+      overflow: hidden;
+      width: 100%;
+      max-width: 560px;
+      border: 1px solid var(--border-color);
+    }
+    .ds-modal-head {
+      padding: 18px var(--m-padding, 24px);
+      display: flex; align-items: center; justify-content: space-between;
+      color: white;
+      border-radius: 0;
+    }
+    .ds-modal-head h3 {
+      font-size: var(--m-title-fs, 16px);
+      font-weight: 800;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ds-modal-head .ico-wrap {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ds-modal-body { padding: var(--m-padding, 24px); }
+    .ds-modal-foot {
+      padding: 14px var(--m-padding, 24px);
+      border-top: 1px solid var(--border-light);
+      display: flex; justify-content: flex-end; gap: 8px;
+      background: #FAFAFA;
+    }
+    .ds-mbtn { padding: 8px 16px; border-radius: 8px; border: none; font-weight: 700; font-size: 12px; cursor: pointer; }
+    .ds-mbtn.ghost { background: #fff; border: 1px solid var(--border-color); color: var(--text-main); }
+    .ds-mbtn.primary { color: #fff; }
+    .info-card {
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex; align-items: flex-start; gap: 10px;
+      border: 1px solid transparent;
+      margin-bottom: 16px;
+    }
+    .info-card .ic-ico { font-size: 20px; line-height: 1.3; }
+    .info-card .ic-name { font-weight: 800; font-size: 13px; color: var(--text-main); }
+    .info-card .ic-meta { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
+
+    /* Assign modal specific */
+    .am-head { background: linear-gradient(135deg, var(--am-primary), #6D28D9); }
+    .am-body .info-card { background: var(--am-info-bg); border-color: color-mix(in srgb, var(--am-primary) 20%, transparent); }
+
+    /* Class modal specific */
+    .cm-head { background: linear-gradient(135deg, var(--cm-primary), #1D4ED8); }
+    .cm-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px;
+      border-radius: var(--cm-radius); overflow: hidden; border: 1px solid var(--border-color); margin-top: 8px;}
+    .cm-table th { background: var(--cm-th-bg); padding: 10px 12px; text-align: left; color: var(--lt-th-text); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px;}
+    .cm-table td { padding: 10px 12px; border-top: 1px solid var(--border-light); color: var(--text-main); }
+    .cm-table tr:hover td { background: var(--cm-row-hover); cursor: pointer; }
+    .cm-table .picked td { background: color-mix(in srgb, var(--cm-primary) 10%, transparent) !important; font-weight: 700; }
+
+    /* Deal modal specific */
+    .dm-head { background: linear-gradient(135deg, var(--dm-header), #991B1B); }
+    .dm-body .info-card { background: var(--dm-info-bg); border-color: color-mix(in srgb, var(--dm-primary) 20%, transparent); }
+
+    /* Complete modal specific */
+    .com-head { background: linear-gradient(135deg, var(--com-header), #047857); }
+    .com-body .info-card { background: var(--com-info-bg); border-color: color-mix(in srgb, var(--com-primary) 20%, transparent); }
+
+    .ds-field { margin-bottom: 14px; }
+    .ds-field label { display: block; font-size: 11px; font-weight: 700; color: var(--text-sub); margin-bottom: 4px; }
+    .ds-field input, .ds-field select, .ds-field textarea {
+      width: 100%; border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 9px 12px; font-size: 12px;
+      font-family: inherit;
+    }
+    .ds-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ========== NEW: LEADS TABLE ========== */
+    .ds-leads-table-wrap {
+      background: var(--lt-bg);
+      border-radius: var(--lt-radius);
+      border: 1px solid var(--lt-border);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .ds-leads-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--lt-cell-fs);
+    }
+    .ds-leads-table thead th {
+      background: var(--lt-th-bg);
+      color: var(--lt-th-text);
+      padding: var(--lt-padding);
+      text-align: left;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.4px;
+      border-bottom: 1px solid var(--lt-border);
+    }
+    .ds-leads-table tbody td {
+      padding: var(--lt-padding);
+      color: var(--lt-text);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .ds-leads-table tbody tr:hover td { background: var(--lt-row-hover); }
+    .ds-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600;
+    }
+    .ds-avatar-sm {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-500), #B91C1C);
+      color: white; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 11px; margin-right: 8px;
+    }
+
+    /* ========== NEW: EDIT MODE HOVER OVERLAY ========== */
+    .ds-edit-mode-toggle {
+      margin-left: auto;
+      padding: 7px 14px; border-radius: 10px;
+      border: 2px solid var(--primary-500);
+      background: transparent;
+      color: var(--primary-500);
+      font-weight: 800; font-size: 12px;
+      cursor: pointer; font-family: inherit;
+      transition: all 0.15s ease;
+    }
+    .ds-edit-mode-toggle.active {
+      background: var(--primary-500);
+      color: white;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-500) 20%, transparent);
+    }
+
+    body.ds-edit-on [data-component] {
+      position: relative;
+      transition: box-shadow 0.15s ease, outline-color 0.15s ease;
+    }
+    body.ds-edit-on [data-component]:hover {
+      outline: 2px dashed #2563EB;
+      outline-offset: 2px;
+      cursor: pointer;
+      z-index: 5;
+    }
+    body.ds-edit-on [data-component]:hover::after {
+      content: '✏️';
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 30px; height: 30px;
+      background: #2563EB;
+      color: white;
+      border-radius: 50%;
+      border: 2px solid white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.45);
+      z-index: 10;
+      pointer-events: none;
+    }
+    body.ds-edit-on .ds-modal-shell [data-component]:hover::after { right: -4px; top: -4px; }
+
+    /* ========== NEW: COMPONENT DETAIL EDITOR MODAL ========== */
+    #ds-editor-mask {
+      position: fixed; inset: 0;
+      background: rgba(15,23,42,0.55);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 999999;
+      padding: 20px;
+    }
+    #ds-editor-mask.open { display: flex; }
+    #ds-editor {
+      width: 100%; max-width: 640px;
+      max-height: 90vh;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.35);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      border: 1px solid var(--border-color);
+    }
+    #ds-editor-head {
+      background: linear-gradient(135deg, var(--primary-500), var(--secondary-color));
+      color: white;
+      padding: 18px 22px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    #ds-editor-head h3 { font-size: 15px; font-weight: 800; }
+    #ds-editor-head p { font-size: 11px; opacity: 0.9; margin-top: 2px; }
+    #ds-editor-close {
+      background: rgba(255,255,255,0.18);
+      border: none; color: white;
+      width: 30px; height: 30px; border-radius: 8px;
+      cursor: pointer; font-size: 16px;
+    }
+    #ds-editor-tabs {
+      padding: 8px;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border-light);
+      display: flex; gap: 6px;
+    }
+    .ds-etab {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: none;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-sub);
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .ds-etab:hover { color: var(--text-main); background: #EEF2F7; }
+    .ds-etab.active { background: var(--primary-500); color: white; box-shadow: 0 2px 6px color-mix(in srgb, var(--primary-500) 30%, transparent); }
+    #ds-editor-body {
+      padding: 20px 22px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .ds-etab-panel { display: none; }
+    .ds-etab-panel.active { display: block; }
+    .ds-field-edit { margin-bottom: 14px; }
+    .ds-field-edit label {
+      display: block;
+      font-size: 11px; font-weight: 700; color: var(--text-sub);
+      margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.3px;
+    }
+    .ds-field-edit .in-row { display: flex; gap: 8px; align-items: center; }
+    .ds-field-edit input[type=color] {
+      width: 40px; height: 34px; border: 1px solid var(--border-color);
+      border-radius: 6px; padding: 2px; cursor: pointer; background: #fff;
+    }
+    .ds-field-edit input[type=text], .ds-field-edit input[type=number], .ds-field-edit select {
+      flex: 1; border: 1px solid var(--border-color);
+      border-radius: 8px; padding: 8px 10px; font-size: 12px;
+      font-family: inherit; background: #fff; outline: none;
+    }
+    .ds-field-edit input[type=text]:focus, .ds-field-edit input[type=number]:focus, .ds-field-edit select:focus {
+      border-color: var(--primary-500);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-500) 15%, transparent);
+    }
+    .ds-unit { font-size: 11px; color: var(--text-sub); font-weight: 700; width: 30px; }
+    #ds-editor-foot {
+      padding: 14px 22px;
+      border-top: 1px solid var(--border-light);
+      display: flex; justify-content: space-between; align-items: center;
+      background: #FAFAFA;
+    }
+    #ds-editor-reset {
+      padding: 8px 12px;
+      background: transparent;
+      border: 1px dashed var(--border-color);
+      color: var(--text-sub);
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    #ds-editor-foot-right { display: flex; gap: 8px; }
+
+    /* Icon picker */
+    .ds-icon-picker { position: relative; }
+    .ds-icon-btn {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px;
+      background: #fff; border: 1px solid var(--border-color);
+      border-radius: 8px; cursor: pointer; font-size: 13px;
+    }
+    .ds-icon-btn .cur { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+    .ds-icon-btn .cur .emo { font-size: 18px; }
+    .ds-icon-grid {
+      position: absolute; z-index: 10;
+      top: 110%; left: 0; right: 0;
+      background: #fff; border: 1px solid var(--border-color);
+      border-radius: 10px; padding: 10px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+      display: none;
+      max-height: 220px; overflow-y: auto;
+    }
+    .ds-icon-grid.open { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
+    .ds-icon-grid .emo-item {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px; cursor: pointer;
+      font-size: 18px; transition: all 0.1s ease;
+    }
+    .ds-icon-grid .emo-item:hover { background: #EFF6FF; transform: scale(1.15); }
+    .ds-icon-grid .emo-item.sel { background: var(--primary-500); }
+    .ds-icon-search {
+      width: 100%; grid-column: 1 / -1;
+      padding: 6px 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 11px; font-family: inherit;
+      margin-bottom: 4px;
+    }
+
+    /* Component type badge label */
+    .comp-type-label {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--primary-500);
+      font-size: 10px;
+      font-weight: 800;
+      border: 1px solid color-mix(in srgb, var(--primary-500) 30%, transparent);
+    }
+  </style>
+</head>
+<body>
+  <!-- GLOBAL CONTROLLER PANEL -->
+  <div class="theme-controller">
+    <h3>⚙️ Cài Đặt Chung</h3>
+    <div class="control-group">
+      <label>Phông Chữ (Typography)</label>
+      <select id="ctrl-font">
+        <option value="'Inter', sans-serif">Inter (Mặc định)</option>
+        <option value="'Roboto', sans-serif">Roboto</option>
+        <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
+        <option value="'Open Sans', sans-serif">Open Sans</option>
+        <option value="'Montserrat', sans-serif">Montserrat</option>
+        <option value="'Lato', sans-serif">Lato</option>
+        <option value="'Poppins', sans-serif">Poppins</option>
+        <option value="'Noto Sans', sans-serif">Noto Sans</option>
+        <option value="Arial, sans-serif">Arial</option>
+        <option value="Tahoma, sans-serif">Tahoma</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label>Cỡ Chữ Gốc (Base Font) <span id="val-fontsize">16px</span></label>
+      <input type="range" id="ctrl-fontsize" value="16" min="12" max="22" step="1">
+    </div>
+    <div class="control-group">
+      <label>Màu Chủ Đạo (Primary)</label>
+      <input type="color" id="ctrl-primary" value="#DC2626">
+    </div>
+    <div class="control-group">
+      <label>Màu Phụ (Secondary)</label>
+      <input type="color" id="ctrl-secondary" value="#1A365D">
+    </div>
+    <div class="control-group">
+      <label>Hệ Số Khoảng Cách (Spacing) <span id="val-spacing">1x</span></label>
+      <input type="range" id="ctrl-spacing" value="1" min="0.5" max="2" step="0.1">
+    </div>
+  </div>
+
+  <div class="top-toolbar">
+    <div class="doc-brand-title">
+      <span>Meko</span><span>CRM</span>
+    </div>
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('tab-ds')">🔧 Trình tạo Design System</button>
+      <button class="tab-btn" onclick="switchTab('tab-kanban')">📋 Kanban Preview</button>
+    </div>
+  </div>
+
+  <!-- ================= TAB 1: DESIGN SYSTEM ================= -->
+  <div id="tab-ds" class="tab-content active workspace-layout">
+    <div class="doc-main-canvas">
+      <h1 class="doc-title-h1">Công Cụ Tạo Design System Nhanh</h1>
+      <div class="doc-subtitle-lead">Chỉnh sửa trực tiếp kích thước, bo góc, và màu sắc thành phần</div>
+
+      <!-- SECTION 1: COLORS -->
+      <div class="part-title">Phần 1: Màu sắc (Colors & Aliases)</div>
+      
+      <h4>Brand Colors</h4>
+      <div class="color-swatch-row">
+        <!-- Primary Swatch -->
+        <div class="color-swatch-item">
+          <input type="color" id="ctrl-swatch-primary" value="#DC2626" style="width:100%; height:48px; border:none; padding:0; cursor:pointer;">
+          <div class="swatch-info">
+            <div class="swatch-label">Brand Primary</div>
+            <div class="swatch-hex" id="swatch-text-primary">#DC2626</div>
+          </div>
+        </div>
+        <!-- Secondary Swatch -->
+        <div class="color-swatch-item">
+          <input type="color" id="ctrl-swatch-secondary" value="#1A365D" style="width:100%; height:48px; border:none; padding:0; cursor:pointer;">
+          <div class="swatch-info">
+            <div class="swatch-label">Brand Secondary</div>
+            <div class="swatch-hex" id="swatch-text-secondary">#1A365D</div>
+          </div>
+        </div>
+      </div>
+
+      <h4>Status Colors (Semantic)</h4>
+      <div class="color-swatch-row">
+        <div class="color-swatch-item">
+          <input type="color" id="ctrl-success" value="#10B981" style="width:100%; height:48px; border:none; padding:0; cursor:pointer;">
+          <div class="swatch-info">
+            <div class="swatch-label">Success</div>
+            <div class="swatch-hex" id="swatch-text-success">#10B981</div>
+          </div>
+        </div>
+        <div class="color-swatch-item">
+          <input type="color" id="ctrl-warning" value="#F59E0B" style="width:100%; height:48px; border:none; padding:0; cursor:pointer;">
+          <div class="swatch-info">
+            <div class="swatch-label">Warning</div>
+            <div class="swatch-hex" id="swatch-text-warning">#F59E0B</div>
+          </div>
+        </div>
+        <div class="color-swatch-item">
+          <input type="color" id="ctrl-error" value="#EF4444" style="width:100%; height:48px; border:none; padding:0; cursor:pointer;">
+          <div class="swatch-info">
+            <div class="swatch-label">Error</div>
+            <div class="swatch-hex" id="swatch-text-error">#EF4444</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: TYPOGRAPHY -->
+      <div class="part-title">Phần 2: Kiểu chữ (Typography)</div>
+      <p style="font-size: 0.85em; color: var(--text-sub); margin-bottom: 8px;">Nhập thử nội dung thực tế để xem phông chữ hiển thị như thế nào:</p>
+      <input type="text" id="live-text-input" class="text-preview-input" value="Khách hàng Nguyễn Văn A vừa đăng ký lớp TOEIC cấp tốc" placeholder="Nhập văn bản cần kiểm tra...">
+      
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Phân Loại</th>
+            <th width="120">Điều chỉnh Size</th>
+            <th>Hiển Thị (Live Preview)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Heading 1 (h1)</td>
+            <td><input type="text" class="inline-input" id="ctrl-h1" value="1.875em"></td>
+            <td><div class="preview-box live-preview-text" style="font-size: var(--h1-size); font-weight: 700;">Khách hàng Nguyễn Văn A vừa đăng ký lớp TOEIC cấp tốc</div></td>
+          </tr>
+          <tr>
+            <td>Heading 2 (h2)</td>
+            <td><input type="text" class="inline-input" id="ctrl-h2" value="1.5em"></td>
+            <td><div class="preview-box live-preview-text" style="font-size: var(--h2-size); font-weight: 600;">Khách hàng Nguyễn Văn A vừa đăng ký lớp TOEIC cấp tốc</div></td>
+          </tr>
+          <tr>
+            <td>Body (base)</td>
+            <td><input type="text" class="inline-input" id="ctrl-body" value="1em"></td>
+            <td><div class="preview-box live-preview-text" style="font-size: var(--body-size); font-weight: 400; color: var(--text-sub);">Khách hàng Nguyễn Văn A vừa đăng ký lớp TOEIC cấp tốc</div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SECTION 3: SPACING & RADIUS -->
+      <div class="part-title">Phần 3: Khoảng cách & Bo góc (Spacing & Radius)</div>
+      
+      <h4>Khối Khoảng cách (Trực quan hóa Hệ số Spacing)</h4>
+      <div class="spacing-grid-strip">
+        <div class="spacing-box-col">
+          <div class="spacing-px-tag">Base 4px</div>
+          <div class="spacing-visual-box" style="width: calc(48px * var(--spacing-scale)); height: calc(48px * var(--spacing-scale));">
+            <div class="spacing-visual-inner" style="width: calc(4px * var(--spacing-scale)); height: calc(4px * var(--spacing-scale));"></div>
+          </div>
+        </div>
+        <div class="spacing-box-col">
+          <div class="spacing-px-tag">Base 8px</div>
+          <div class="spacing-visual-box" style="width: calc(48px * var(--spacing-scale)); height: calc(48px * var(--spacing-scale));">
+            <div class="spacing-visual-inner" style="width: calc(8px * var(--spacing-scale)); height: calc(8px * var(--spacing-scale));"></div>
+          </div>
+        </div>
+        <div class="spacing-box-col">
+          <div class="spacing-px-tag">Base 16px</div>
+          <div class="spacing-visual-box" style="width: calc(48px * var(--spacing-scale)); height: calc(48px * var(--spacing-scale));">
+            <div class="spacing-visual-inner" style="width: calc(16px * var(--spacing-scale)); height: calc(16px * var(--spacing-scale));"></div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-top: 24px;">Bảng thiết lập Bo Góc (Border Radius)</h4>
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Biến Số (Token)</th>
+            <th>Ứng Dụng</th>
+            <th width="120">Tùy Chỉnh (px)</th>
+            <th width="100">Hiển Thị</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>--radius-sm</td>
+            <td>Checkbox, Tag/Badge, Label</td>
+            <td><input type="number" class="inline-input" id="ctrl-rad-sm" value="5"></td>
+            <td><div class="radius-preview-box" id="preview-rad-sm" style="border-radius: var(--radius-sm);">sm</div></td>
+          </tr>
+          <tr>
+            <td>--radius-md</td>
+            <td>Button, Input, Select</td>
+            <td><input type="number" class="inline-input" id="ctrl-rad-md" value="10"></td>
+            <td><div class="radius-preview-box" id="preview-rad-md" style="border-radius: var(--radius-md);">md</div></td>
+          </tr>
+          <tr>
+            <td>--radius-lg</td>
+            <td>KanbanCard, Data Table, Image</td>
+            <td><input type="number" class="inline-input" id="ctrl-rad-lg" value="4"></td>
+            <td><div class="radius-preview-box" id="preview-rad-lg" style="border-radius: var(--radius-lg);">lg</div></td>
+          </tr>
+          <tr>
+            <td>--radius-xl</td>
+            <td>Modal Popup, Drawer</td>
+            <td><input type="number" class="inline-input" id="ctrl-rad-xl" value="6"></td>
+            <td><div class="radius-preview-box" id="preview-rad-xl" style="border-radius: var(--radius-xl);">xl</div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SECTION 4: COMPONENT BUILDER -->
+      <div class="part-title">Phần 4: Thiết kế linh kiện (Component Builder)</div>
+      <p style="font-size: 0.85em; color: var(--text-sub);">Tùy chỉnh màu sắc cụ thể của Card Học viên & Form Chi tiết.</p>
+      
+      <div class="builder-container">
+        
+        <!-- Controls Sidebar -->
+        <div class="ctrl-panel">
+          <h4 style="margin-bottom: 12px; font-size: 14px; border-bottom: 1px solid var(--border-light); padding-bottom: 8px;">Tùy chỉnh Màu sắc Component</h4>
+          
+          <div class="ctrl-row">
+            <span>Nền Card (--comp-bg)</span>
+            <input type="color" id="comp-bg" value="#FFFFFF">
+          </div>
+          <div class="ctrl-row">
+            <span>Viền Card (--comp-border)</span>
+            <input type="color" id="comp-border" value="#E2E8F0">
+          </div>
+          <div class="ctrl-row">
+            <span>Chữ Chính (--text-main)</span>
+            <input type="color" id="comp-text-main" value="#0F172A">
+          </div>
+          <div class="ctrl-row">
+            <span>Chữ Phụ (--text-sub)</span>
+            <input type="color" id="comp-text-sub" value="#475569">
+          </div>
+          
+          <div style="margin: 16px 0; border-top: 1px solid var(--border-light);"></div>
+          
+          <div class="ctrl-row">
+            <span>Nút màu Đỏ (Phân công)</span>
+            <input type="color" id="comp-btn-red" value="#DC2626">
+          </div>
+          <div class="ctrl-row">
+            <span>Nút màu Xanh (Lưu)</span>
+            <input type="color" id="comp-btn-blue" value="#2563EB">
+          </div>
+          <div class="ctrl-row">
+            <span>Nút màu Tím (Sale)</span>
+            <input type="color" id="comp-btn-purple" value="#8B5CF6">
+          </div>
+
+          <div style="margin: 16px 0; border-top: 1px solid var(--border-light);"></div>
+          
+          <div class="ctrl-row">
+            <span>Nền Tag (Xanh nhạt)</span>
+            <input type="color" id="comp-tag-blue-bg" value="#EFF6FF">
+          </div>
+          <div class="ctrl-row">
+            <span>Chữ Tag (Xanh đậm)</span>
+            <input type="color" id="comp-tag-blue-text" value="#2563EB">
+          </div>
+          <div class="ctrl-row">
+            <span>Nền Tag (Cảnh báo)</span>
+            <input type="color" id="comp-tag-warn-bg" value="#FFFBEB">
+          </div>
+          <div class="ctrl-row">
+            <span>Chữ Tag (Cảnh báo)</span>
+            <input type="color" id="comp-tag-warn-text" value="#D97706">
+          </div>
+        </div>
+
+        <!-- Live Display Area -->
+        <div style="background: var(--bg-workspace); padding: 24px; border-radius: var(--radius-lg);">
+          
+          <!-- Component 1: Student Card -->
+          <h4 style="margin-bottom: 12px; font-size: 14px;">1. Thẻ Học Viên (Student Card)</h4>
+          <div class="c1-card" style="margin-bottom: 30px;">
+            <div class="c1-header">
+              <span class="c1-title">Nguyễn Văn A</span>
+              <span class="c1-badge-id">#HS-1001</span>
+            </div>
+            
+            <div class="c1-row-info">
+              <span class="c1-icon-text">📞 0901.223.234</span>
+              <span class="c1-icon-text">📅 23/09/2026 16:00</span>
+            </div>
+
+            <div class="c1-tag-group">
+              <span class="c1-tag-blue">IELTS</span>
+            </div>
+
+            <div class="c1-tag-group">
+              <span class="c1-tag-warn">⚠️ Chưa phân công</span>
+            </div>
+
+            <div class="c1-btn-group">
+              <button class="c1-btn-primary">👤 Phân công</button>
+              <button class="c1-btn-secondary">Chi tiết</button>
+            </div>
+          </div>
+
+          <!-- Component 2: Detail Form -->
+          <h4 style="margin-bottom: 12px; font-size: 14px;">2. Khung Chi Tiết (Detail Form / Drawer)</h4>
+          <div class="c2-card">
+            <div class="c2-header">
+              <div class="c2-avatar-placeholder">✕</div>
+              <div>
+                <div class="c2-head-title">Lê Hoàng Cường <span class="c1-badge-id">#HS-1003</span> <span class="c1-badge-id" style="background:#DBEAFE; color:#1E40AF; border:none;">Mới</span></div>
+                <div class="c2-head-sub">📅 Tiếp nhận: 23/09/2026 16:00 • 🏷️ TOEIC</div>
+              </div>
+            </div>
+
+            <div class="c2-body">
+              
+              <!-- Section Blue -->
+              <div class="c2-section c2-sec-blue">
+                <div class="c2-sec-title c2-text-blue">🛡️ THÔNG TIN LIÊN HỆ & TIẾP CẬN</div>
+                <div class="c2-grid-2">
+                  <div class="c2-info-item">
+                    <div class="c2-info-label">Số điện thoại:</div>
+                    <div class="c2-info-val">0912.333.890</div>
+                  </div>
+                  <div class="c2-info-item">
+                    <div class="c2-info-label">Email liên hệ:</div>
+                    <div class="c2-info-val">Chưa cung cấp</div>
+                  </div>
+                  <div class="c2-info-item">
+                    <div class="c2-info-label">Nguồn đăng ký:</div>
+                    <div class="c2-info-val">Website Form</div>
+                  </div>
+                  <div class="c2-info-item">
+                    <div class="c2-info-label">Kênh tiếp nhận:</div>
+                    <div class="c2-info-val">Tự động (Lead CRM)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section Purple -->
+              <div class="c2-section c2-sec-purple">
+                <div class="c2-sec-title c2-text-purple">👤 Phân công tư vấn viên <span class="c1-tag-warn" style="position:absolute; right:12px; top:8px; border:none; padding:2px 8px; font-size:0.7em;">Chưa phân công</span></div>
+                
+                <div style="font-size:0.75em; margin-bottom: 4px; font-weight: 600;">Chọn Tư vấn viên tiếp nhận:</div>
+                <select class="c2-input"><option>👤 Tư Vấn Viên 1 (sale01@mekosoft.vn)</option></select>
+                
+                <div style="font-size:0.75em; margin-top: 10px; margin-bottom: 4px; font-weight: 600;">Ghi chú giao việc (nếu có):</div>
+                <input type="text" class="c2-input" placeholder="VD: Khách hẹn gọi lại buổi sáng...">
+                
+                <button class="c2-btn-full bg-purple">👤 Phân công cho Sale ngay</button>
+              </div>
+
+              <!-- Section Red -->
+              <div class="c2-section c2-sec-red">
+                <div class="c2-sec-title c2-text-red">💲 Giao dịch Deal & Học phí</div>
+                <div style="font-size:0.75em; color:var(--comp-text-sub);">Hồ sơ chưa được tạo Deal. Khi tư vấn thành công, tạo Deal để chuyển sang cột Chờ cọc.</div>
+                <button class="c2-btn-full bg-red">💲 Tạo Deal Tuyển Sinh ngay</button>
+              </div>
+
+              <!-- Section Footer -->
+              <div>
+                <div class="c2-sec-title">Thêm ghi chú tương tác</div>
+                <textarea class="c2-input" style="height: 60px;" placeholder="Nhập nội dung cuộc gọi hoặc ghi chú mới..."></textarea>
+                <div style="display:flex; justify-content: flex-end;">
+                  <button class="c2-btn-full bg-blue" style="width: 120px;">Lưu ghi chú</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= TAB 2: KANBAN PREVIEW ================= -->
+  <div id="tab-kanban" class="tab-content workspace-layout" style="max-width: 1300px;">
+    <div class="kanban-layout">
+      
+      <!-- Kanban Header -->
+      <div class="kanban-board-header">
+        <div class="kanban-board-title">Tuyển Sinh Tiếng Anh</div>
+        <div class="kanban-board-actions">
+          <input type="text" class="c2-input" style="width:200px; margin:0;" placeholder="🔍 Tìm kiếm học viên...">
+          <button class="btn-create-deal">+ Thêm Học Viên</button>
+        </div>
+      </div>
+
+      <!-- Kanban Board -->
+      <div class="kanban-columns">
+        
+        <!-- Column 1 -->
+        <div class="kanban-col">
+          <div class="kanban-col-header" style="color: #2563EB; border-color: #BFDBFE;">
+            <span>Mới</span>
+            <span class="kanban-col-count">2</span>
+          </div>
+          
+          <div class="c1-card">
+            <div class="c1-header">
+              <span class="c1-title">Lê Hoàng Cường</span>
+              <span class="c1-badge-id">#HS-1003</span>
+            </div>
+            <div class="c1-row-info"><span class="c1-icon-text">📞 0912.333.890</span></div>
+            <div class="c1-tag-group"><span class="c1-tag-blue" style="background:#DBEAFE; color:#1E40AF;">TOEIC</span></div>
+            <div class="c1-tag-group"><span class="c1-tag-warn">⚠️ Chưa phân công</span></div>
+            <div class="c1-btn-group">
+              <button class="c1-btn-primary">👤 Phân công</button>
+              <button class="c1-btn-secondary">Chi tiết</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Column 2 -->
+        <div class="kanban-col">
+          <div class="kanban-col-header" style="color: #D97706; border-color: #FDE68A;">
+            <span>Đang tư vấn</span>
+            <span class="kanban-col-count">1</span>
+          </div>
+          
+          <div class="c1-card">
+            <div class="c1-header">
+              <span class="c1-title">Nguyễn Văn A</span>
+              <span class="c1-badge-id">#HS-1001</span>
+            </div>
+            <div class="c1-row-info"><span class="c1-icon-text">📞 0901.223.234</span></div>
+            <div class="c1-tag-group"><span class="c1-tag-blue">IELTS</span></div>
+            <div class="c1-tag-group"><span class="c1-badge-id" style="background:#F3E8FF; color:#6B21A8; border:none;">Sale: Tư vấn 1</span></div>
+            <div class="c1-btn-group">
+              <button class="c1-btn-primary" style="background:var(--color-warning);">📝 Ghi chú</button>
+              <button class="c1-btn-secondary">Chi tiết</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Column 3 -->
+        <div class="kanban-col">
+          <div class="kanban-col-header" style="color: #059669; border-color: #A7F3D0;">
+            <span>Hoàn thành</span>
+            <span class="kanban-col-count">1</span>
+          </div>
+          
+          <div class="c1-card">
+            <div class="c1-header">
+              <span class="c1-title">Trần Thị B</span>
+              <span class="c1-badge-id">#HS-0998</span>
+            </div>
+            <div class="c1-row-info"><span class="c1-icon-text">📞 0988.111.222</span></div>
+            <div class="c1-tag-group">
+              <span class="c1-badge-id" style="background:#D1FAE5; color:#065F46; border:none;">Đã thu học phí</span>
+            </div>
+            <div class="c1-btn-group">
+              <button class="c1-btn-primary" style="background:var(--color-success);">✅ Xem Deal</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SCRIPT -->
+  <script>
+    const root = document.documentElement;
+
+    // --- Tab Switching Logic ---
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // --- Global Controls ---
+    const inFont = document.getElementById('ctrl-font');
+    const inFontSize = document.getElementById('ctrl-fontsize');
+    const inSpacing = document.getElementById('ctrl-spacing');
+    const inPrimary = document.getElementById('ctrl-primary');
+    const inSecondary = document.getElementById('ctrl-secondary');
+    
+    inFont.addEventListener('change', (e) => root.style.setProperty('--base-font-family', e.target.value));
+    
+    inFontSize.addEventListener('input', (e) => {
+      root.style.setProperty('--base-font-size', e.target.value + 'px');
+      document.getElementById('val-fontsize').innerText = e.target.value + 'px';
+    });
+    
+    inSpacing.addEventListener('input', (e) => {
+      root.style.setProperty('--spacing-scale', e.target.value);
+      document.getElementById('val-spacing').innerText = e.target.value + 'x';
+    });
+    
+    inPrimary.addEventListener('input', (e) => {
+      const val = e.target.value.toUpperCase();
+      root.style.setProperty('--primary-500', val);
+      document.getElementById('swatch-text-primary').innerText = val;
+    });
+
+    inSecondary.addEventListener('input', (e) => {
+      const val = e.target.value.toUpperCase();
+      root.style.setProperty('--secondary-color', val);
+      document.getElementById('swatch-text-secondary').innerText = val;
+    });
+
+    // --- Semantic Color Controls ---
+    const semColors = [
+      { id: 'ctrl-success', var: '--color-success', textId: 'swatch-text-success' },
+      { id: 'ctrl-warning', var: '--color-warning', textId: 'swatch-text-warning' },
+      { id: 'ctrl-error', var: '--color-error', textId: 'swatch-text-error' }
+    ];
+
+    semColors.forEach(item => {
+      const el = document.getElementById(item.id);
+      el.addEventListener('input', (e) => {
+        const val = e.target.value.toUpperCase();
+        root.style.setProperty(item.var, val);
+        document.getElementById(item.textId).innerText = val;
+      });
+    });
+
+    // --- Section 2: Typography Controls ---
+    const inLiveText = document.getElementById('live-text-input');
+    const livePreviews = document.querySelectorAll('.live-preview-text');
+    inLiveText.addEventListener('input', (e) => {
+      const text = e.target.value || ' ';
+      livePreviews.forEach(el => el.innerText = text);
+    });
+
+    document.getElementById('ctrl-h1').addEventListener('input', (e) => root.style.setProperty('--h1-size', e.target.value));
+    document.getElementById('ctrl-h2').addEventListener('input', (e) => root.style.setProperty('--h2-size', e.target.value));
+    document.getElementById('ctrl-body').addEventListener('input', (e) => root.style.setProperty('--body-size', e.target.value));
+
+    // --- Section 3: Radius Controls ---
+    document.getElementById('ctrl-rad-sm').addEventListener('input', (e) => {
+      root.style.setProperty('--radius-sm', e.target.value + 'px');
+      document.getElementById('preview-rad-sm').style.borderRadius = e.target.value + 'px';
+    });
+    document.getElementById('ctrl-rad-md').addEventListener('input', (e) => {
+      root.style.setProperty('--radius-md', e.target.value + 'px');
+      document.getElementById('preview-rad-md').style.borderRadius = e.target.value + 'px';
+    });
+    document.getElementById('ctrl-rad-lg').addEventListener('input', (e) => {
+      root.style.setProperty('--radius-lg', e.target.value + 'px');
+      document.getElementById('preview-rad-lg').style.borderRadius = e.target.value + 'px';
+    });
+    document.getElementById('ctrl-rad-xl').addEventListener('input', (e) => {
+      root.style.setProperty('--radius-xl', e.target.value + 'px');
+      document.getElementById('preview-rad-xl').style.borderRadius = e.target.value + 'px';
+    });
+
+    // --- Sync Brand Swatches ---
+    document.getElementById('ctrl-swatch-primary').addEventListener('input', (e) => {
+      inPrimary.value = e.target.value;
+      inPrimary.dispatchEvent(new Event('input'));
+    });
+    document.getElementById('ctrl-swatch-secondary').addEventListener('input', (e) => {
+      inSecondary.value = e.target.value;
+      inSecondary.dispatchEvent(new Event('input'));
+    });
+
+    // --- Section 4: Component Builder Controls ---
+    const compColors = [
+      { id: 'comp-bg', var: '--comp-bg' },
+      { id: 'comp-border', var: '--comp-border' },
+      { id: 'comp-text-main', var: '--comp-text-main' },
+      { id: 'comp-text-sub', var: '--comp-text-sub' },
+      { id: 'comp-btn-red', var: '--comp-btn-red' },
+      { id: 'comp-btn-blue', var: '--comp-btn-blue' },
+      { id: 'comp-btn-purple', var: '--comp-btn-purple' },
+      { id: 'comp-tag-blue-bg', var: '--comp-tag-blue-bg' },
+      { id: 'comp-tag-blue-text', var: '--comp-tag-blue-text' },
+      { id: 'comp-tag-warn-bg', var: '--comp-tag-warn-bg' },
+      { id: 'comp-tag-warn-text', var: '--comp-tag-warn-text' }
+    ];
+
+    compColors.forEach(item => {
+      const el = document.getElementById(item.id);
+      el.addEventListener('input', (e) => {
+        root.style.setProperty(item.var, e.target.value);
+      });
+    });
+  </script>
+</body>
+</html>
