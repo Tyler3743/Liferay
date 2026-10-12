@@ -12,9 +12,9 @@ giao diện Form đăng ký tư vấn/tuyển sinh:
 .\gradlew build
 
 
-scp client-extensions/*/dist/*.zip ubuntu@192.168.1.250:/home/ubuntu/
+scp client-extensions/*/dist/*.zip ubuntu@192.168.1.250:/home/ubuntu/ (cập nhật hết)
 
-
+scp "D:\CRM system\project\client-extensions\meko-crm-kanban\dist\meko-crm-kanban.zip" ubuntu@192.168.1.250:/home/ubuntu/ (chỉ cập nhật lại kanban)
 
 ssh ubuntu@192.168.1.250
 
