@@ -9,6 +9,8 @@ interface KanbanColumnProps {
   onAssignClick?: (card: KanbanCardType) => void;
   onSelectClassClick?: (card: KanbanCardType) => void;
   onDealClick?: (card: KanbanCardType) => void;
+  isManager?: boolean;
+  currentSaleId?: string;
 }
 
 const columnColorStyles: Record<string, { bar: string; badge: string; hex: string }> = {
@@ -25,7 +27,9 @@ export const KanbanColumn: React.FC<KanbanColumnProps> = ({
   onCardClick,
   onAssignClick,
   onSelectClassClick,
-  onDealClick
+  onDealClick,
+  isManager = true,
+  currentSaleId = 'sale01'
 }) => {
   const colorInfo = columnColorStyles[column.id] || { bar: 'bg-blue-500', badge: 'bg-gray-100 text-gray-700', hex: '#3b82f6' };
 
@@ -64,9 +68,11 @@ export const KanbanColumn: React.FC<KanbanColumnProps> = ({
                   card={card}
                   index={index}
                   onClick={onCardClick}
-                  onAssignClick={onAssignClick}
+                  onAssignClick={isManager ? onAssignClick : undefined}
                   onSelectClassClick={onSelectClassClick}
                   onDealClick={onDealClick}
+                  isManager={isManager}
+                  isDragDisabled={!isManager && card.assignedTo !== currentSaleId}
                 />
               ))}
 

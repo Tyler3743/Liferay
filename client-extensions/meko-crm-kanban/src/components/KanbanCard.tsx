@@ -10,6 +10,8 @@ interface KanbanCardProps {
   onAssignClick?: (card: KanbanCardType) => void;
   onSelectClassClick?: (card: KanbanCardType) => void;
   onDealClick?: (card: KanbanCardType) => void;
+  isManager?: boolean;
+  isDragDisabled?: boolean;
 }
 
 export const KanbanCard: React.FC<KanbanCardProps> = ({
@@ -18,10 +20,12 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
   onClick,
   onAssignClick,
   onSelectClassClick,
-  onDealClick
+  onDealClick,
+  isManager = true,
+  isDragDisabled = false
 }) => {
   return (
-    <Draggable draggableId={card.id} index={index}>
+    <Draggable draggableId={card.id} index={index} isDragDisabled={isDragDisabled}>
       {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
@@ -128,20 +132,22 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
           {/* HÀNG NÚT HÀNH ĐỘNG ĐỒNG BỘ TRÊN MỌI THẺ */}
           <div className="mt-1 pt-2 border-t border-gray-100 flex items-center justify-between gap-1.5">
             {!card.assignedTo ? (
-              <button
-                type="button"
-                onPointerDown={(e) => e.stopPropagation()}
-                onMouseDown={(e) => e.stopPropagation()}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (onAssignClick) onAssignClick(card);
-                  else onClick(card);
-                }}
-                className="bg-brand-primary flex-1 py-1.5 px-2 hover:opacity-90 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 shadow-xs transition cursor-pointer text-white"
-              >
-                <UserCheck className="w-3.5 h-3.5 text-white" />
-                <span>Phân công</span>
-              </button>
+              isManager ? (
+                <button
+                  type="button"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onAssignClick) onAssignClick(card);
+                    else onClick(card);
+                  }}
+                  className="bg-brand-primary flex-1 py-1.5 px-2 hover:opacity-90 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 shadow-xs transition cursor-pointer text-white"
+                >
+                  <UserCheck className="w-3.5 h-3.5 text-white" />
+                  <span>Phân công</span>
+                </button>
+              ) : null
             ) : !card.selectedClass ? (
               <button
                 type="button"

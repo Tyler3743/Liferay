@@ -22,7 +22,7 @@ export const AssignModal: React.FC<AssignModalProps> = ({ card, onClose, onConfi
   if (!card) return null;
 
   const handleConfirm = () => {
-    const saleName = assigneeId === 'sale01' ? 'Tư Vấn Viên 1' : 'Tư Vấn Viên';
+    const saleName = assigneeId === 'sale01' ? 'Tư Vấn Viên 1' : assigneeId === 'sale02' ? 'Tư Vấn Viên 2' : 'Tư Vấn Viên';
     onConfirm(card.id, assigneeId, saleName, assignNoteText);
     onClose();
   };
@@ -70,6 +70,7 @@ export const AssignModal: React.FC<AssignModalProps> = ({ card, onClose, onConfi
             className="w-full bg-white border border-gray-300 rounded-lg p-2.5 text-sm font-medium text-gray-800 outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
           >
             <option value="sale01">Tư Vấn Viên 1 (sale01@mekosoft.vn)</option>
+            <option value="sale02">Tư Vấn Viên 2 (sale02@mekosoft.vn)</option>
           </select>
         </div>
 

@@ -8,7 +8,7 @@ import { ClassSelectModal } from './ClassSelectModal.tsx';
 import { DealModal } from './DealModal.tsx';
 import { CompleteStudentModal } from './CompleteStudentModal.tsx';
 import type { KanbanBoardData, KanbanCardType, ColumnId } from '../types/kanban.ts';
-import { Search, Trash2, CheckCircle2, Kanban, Users, User, ShieldAlert } from 'lucide-react';
+import { Search, Trash2, CheckCircle2, Kanban, Users, User, ShieldAlert, LogOut, LogIn, Lock } from 'lucide-react';
 import { initialKanbanData } from '../data/mockKanban.ts';
 
 const emptyKanbanData: KanbanBoardData = {
@@ -49,8 +49,55 @@ const columnToInquiryStatus = (colId: string): string => {
   }
 };
 
+// Lấy thông tin user đăng nhập từ Liferay
+const getLiferayUserInfo = () => {
+  const win = window as any;
+  const td = win.themeDisplay || win.Liferay?.ThemeDisplay;
+
+  let isSignedIn = false;
+  if (typeof td?.isSignedIn === 'function') {
+    isSignedIn = Boolean(td.isSignedIn());
+  } else if (typeof td?.isSignedIn === 'boolean') {
+    isSignedIn = td.isSignedIn;
+  }
+
+  let userEmail = '';
+  if (typeof td?.getUserEmailAddress === 'function') {
+    userEmail = td.getUserEmailAddress() || '';
+  }
+
+  let userName = '';
+  if (typeof td?.getUserName === 'function') {
+    userName = td.getUserName() || '';
+  }
+
+  const userId = typeof td?.getUserId === 'function' ? td.getUserId() : '';
+  if (userId && String(userId) !== '0') {
+    isSignedIn = true;
+  }
+
+  let detectedRole: 'manager' | 'sale' = 'manager';
+  let detectedSaleId = 'sale01';
+
+  const checkStr = (userEmail + ' ' + userName).toLowerCase();
+  if (checkStr.includes('sale02')) {
+    detectedRole = 'sale';
+    detectedSaleId = 'sale02';
+  } else if (checkStr.includes('sale01') || checkStr.includes('sale')) {
+    detectedRole = 'sale';
+    detectedSaleId = 'sale01';
+  } else {
+    detectedRole = 'manager';
+  }
+
+  return { isSignedIn, userEmail: userEmail || userName, userName: userName || userEmail, detectedRole, detectedSaleId };
+};
+
 export const KanbanBoard: React.FC = () => {
-  const [currentRole, setCurrentRole] = useState<'manager' | 'sale'>('manager');
+  const [currentUserInfo, setCurrentUserInfo] = useState(() => getLiferayUserInfo());
+  const [currentRole, setCurrentRole] = useState<'manager' | 'sale'>(() => getLiferayUserInfo().detectedRole);
+  const [currentSaleId, setCurrentSaleId] = useState<string>(() => getLiferayUserInfo().detectedSaleId);
+  const [isCheckingAuth, setIsCheckingAuth] = useState<boolean>(true);
   const [activeView, setActiveView] = useState<'kanban' | 'leads'>('kanban');
 
   const [data, setData] = useState<KanbanBoardData>(emptyKanbanData);
@@ -67,6 +114,135 @@ export const KanbanBoard: React.FC = () => {
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  // Xác thực đăng nhập và lấy Role chính xác qua Liferay Core API
+  useEffect(() => {
+    const fetchCurrentUserAndRoles = async () => {
+      try {
+        const csrf = (window as any).Liferay?.authToken || '';
+        const headers: HeadersInit = {};
+        if (csrf) headers['x-csrf-token'] = csrf;
+
+        // 1. Lấy thông tin user hiện tại
+        const userRes = await fetch('/api/jsonws/user/get-current-user', {
+          credentials: 'include',
+          headers
+        });
+
+        if (userRes.ok) {
+          const user = await userRes.json();
+          const isGuest = Boolean(user.defaultUser);
+
+          if (!isGuest && user.userId) {
+            const email = (user.emailAddress || '').toLowerCase();
+            const screenName = (user.screenName || '').toLowerCase();
+            const fullName = `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.screenName || user.emailAddress;
+
+            let role: 'manager' | 'sale' = 'manager';
+            let saleId = 'sale01';
+
+            // 2. Gọi API chuyên dụng lấy danh sách TẤT CẢ các Role của User này theo hướng dẫn của Mentor
+            try {
+              const rolesRes = await fetch(`/api/jsonws/role/get-user-roles/user-id/${user.userId}`, {
+                credentials: 'include',
+                headers
+              });
+              if (rolesRes.ok) {
+                const rolesList: any[] = await rolesRes.json();
+                console.log('Liferay Roles for User:', rolesList);
+
+                // Kiểm tra tên Role trong danh sách Role trả về từ Liferay
+                const isSaleRole = rolesList.some(r => {
+                  const rName = (r.name || '').toLowerCase();
+                  const rTitle = (r.title || '').toLowerCase();
+                  return rName.includes('sale') || rTitle.includes('sale');
+                });
+
+                const isManagerRole = rolesList.some(r => {
+                  const rName = (r.name || '').toLowerCase();
+                  const rTitle = (r.title || '').toLowerCase();
+                  return rName.includes('manager') || rTitle.includes('manager') || rName === 'administrator';
+                });
+
+                if (isSaleRole) {
+                  role = 'sale';
+                } else if (isManagerRole) {
+                  role = 'manager';
+                }
+              }
+            } catch (roleErr) {
+              console.warn('Could not fetch roles from API, fallback to username/email pattern:', roleErr);
+              if (screenName.includes('sale') || email.includes('sale')) {
+                role = 'sale';
+              } else {
+                role = 'manager';
+              }
+            }
+
+            // Gán Sale ID cụ thể
+            if (screenName.includes('sale02') || email.includes('sale02')) {
+              saleId = 'sale02';
+            } else {
+              saleId = 'sale01';
+            }
+
+            setCurrentUserInfo({
+              isSignedIn: true,
+              userEmail: user.emailAddress,
+              userName: fullName,
+              detectedRole: role,
+              detectedSaleId: saleId
+            });
+            setCurrentRole(role);
+            setCurrentSaleId(saleId);
+            setIsCheckingAuth(false);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Liferay API check error:', err);
+      }
+
+      // Fallback nếu chạy local không có server Liferay
+      const fallback = getLiferayUserInfo();
+      setCurrentUserInfo(fallback);
+      setCurrentRole(fallback.detectedRole);
+      setCurrentSaleId(fallback.detectedSaleId);
+      setIsCheckingAuth(false);
+    };
+
+    fetchCurrentUserAndRoles();
+  }, []);
+
+  const handleDeleteLead = (leadId: string, leadName?: string) => {
+    if (currentRole !== 'manager') {
+      showToast('❌ Chỉ Quản lý mới có quyền xóa / hủy hồ sơ!');
+      return;
+    }
+    if (!window.confirm(`Bạn có chắc chắn muốn HỦY / XÓA hồ sơ ${leadName ? `"${leadName}"` : ''}?`)) {
+      return;
+    }
+
+    let removedCard: KanbanCardType | undefined = undefined;
+    const newColumns = data.columns.map(col => {
+      const card = col.cards.find(c => c.id === leadId);
+      if (card) removedCard = card;
+      const cards = col.cards.filter(c => c.id !== leadId);
+      return { ...col, cards, count: cards.length };
+    });
+
+    setData({ ...data, columns: newColumns });
+    if (selectedCard?.id === leadId) {
+      setSelectedCard(null);
+    }
+
+    if (removedCard) {
+      const targetCard: KanbanCardType = removedCard;
+      persistLeadToDB(leadId, 0, { ...targetCard, requirement: '[HỦY HỒ SƠ] ' + (targetCard.requirement || '') });
+      persistInquiryStatusToDB(targetCard.inquiries, 'Đã hủy');
+    }
+    showToast(`🗑️ Đã HỦY / XÓA hồ sơ: ${leadName || leadId}`);
   };
 
   useEffect(() => {
@@ -484,6 +660,10 @@ export const KanbanBoard: React.FC = () => {
     if (!destination) return;
 
     if (destination.droppableId === 'trash_cancelled') {
+      if (currentRole !== 'manager') {
+        showToast('❌ Chỉ Quản lý mới có quyền xóa / hủy hồ sơ!');
+        return;
+      }
       const sourceColIndex = data.columns.findIndex(col => col.id === source.droppableId);
       if (sourceColIndex === -1) return;
       const sourceCol = data.columns[sourceColIndex];
@@ -523,8 +703,19 @@ export const KanbanBoard: React.FC = () => {
     if (cardIndex === -1) return;
     let [movedCard] = sourceCards.splice(cardIndex, 1);
 
+    // Quyền của Sale: chỉ được di chuyển card gán cho chính mình
+    if (currentRole === 'sale' && movedCard.assignedTo !== currentSaleId) {
+      showToast('❌ Bạn chỉ có quyền di chuyển các hồ sơ được phân công cho mình!');
+      return;
+    }
+
     const destId = destination.droppableId as ColumnId;
     const destStatusNum = columnToStatusNum(destId);
+
+    if (destId === 'unassigned' && currentRole !== 'manager') {
+      showToast('❌ Chỉ Quản lý mới có quyền chuyển hồ sơ về Chưa phân công!');
+      return;
+    }
 
     // Bắt lỗi: Chưa có Deal thì không được qua Chờ cọc, Đã cọc, Hoàn thành
     if ((destId === 'pending_deposit' || destId === 'deposited' || destId === 'completed') && !movedCard.deal) {
@@ -586,7 +777,8 @@ export const KanbanBoard: React.FC = () => {
 
   const filterCard = (card: KanbanCardType) => {
     if (currentRole === 'sale') {
-      if (card.assignedTo && card.assignedTo !== 'sale01') return false;
+      // Với Sale: Chỉ xem các card được gán cho chính mình
+      if (card.assignedTo !== currentSaleId) return false;
     }
 
     if (!searchTerm.trim()) return true;
@@ -615,6 +807,62 @@ export const KanbanBoard: React.FC = () => {
     }))
   ).filter(filterCard);
 
+  if (isCheckingAuth) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[450px] gap-3 text-gray-500 font-medium text-sm">
+        <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        <span>Đang kiểm tra quyền và tài khoản Liferay...</span>
+      </div>
+    );
+  }
+
+  // KỊCH BẢN CHẶN TRUY CẬP: Chưa đăng nhập sẽ KHÔNG vào được giao diện Kanban để kéo thả
+  if (!currentUserInfo.isSignedIn) {
+    const loginUrl = `/c/portal/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+    return (
+      <div className="max-w-[700px] mx-auto my-16 p-8 md:p-12 bg-white border border-gray-200 rounded-3xl shadow-xl text-center">
+        <div className="w-20 h-20 bg-amber-50 text-amber-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner border border-amber-200">
+          <Lock className="w-10 h-10" />
+        </div>
+
+        <span className="inline-block px-3.5 py-1 bg-amber-100 text-amber-800 font-bold text-xs rounded-full uppercase tracking-wider mb-3">
+          Khu Vực Phân Quyền Nội Bộ
+        </span>
+
+        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3">
+          Yêu Cầu Đăng Nhập Hệ Thống
+        </h2>
+
+        <p className="text-gray-600 text-sm max-w-md mx-auto mb-8 leading-relaxed">
+          Giao diện <b>Phễu tuyển sinh Kanban</b> chỉ dành cho <b>Quản lý</b> và <b>Tư vấn viên (Sale)</b>. Bạn cần đăng nhập tài khoản để xem dữ liệu và thực hiện các thao tác kéo thả hồ sơ.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href={loginUrl}
+            className="w-full sm:w-auto px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center gap-2"
+          >
+            <LogIn className="w-4 h-4" /> Đăng Nhập Liferay
+          </a>
+          <a
+            href="/web/guest/courses"
+            className="w-full sm:w-auto px-6 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm rounded-xl transition-all"
+          >
+            Quay Về Trang Chủ
+          </a>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-center gap-6 text-xs text-gray-400">
+          <span>👑 Quản lý</span>
+          <span>•</span>
+          <span>👤 Tư vấn viên Sale</span>
+          <span>•</span>
+          <span>🔒 Bảo mật Liferay DXP</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="p-8 max-w-[1400px] mx-auto min-h-screen relative">
       {/* Toast Notification */}
@@ -631,14 +879,33 @@ export const KanbanBoard: React.FC = () => {
       {/* Control Panel (Toolbar) */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm border border-gray-200">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            {activeView === 'kanban' ? <Kanban className="w-6 h-6 text-blue-600" /> : <Users className="w-6 h-6 text-blue-600" />}
-            {activeView === 'kanban' ? 'Phễu tuyển sinh Kanban' : 'Khách hàng tiềm năng'}
-          </h1>
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              {activeView === 'kanban' ? <Kanban className="w-6 h-6 text-blue-600" /> : <Users className="w-6 h-6 text-blue-600" />}
+              {activeView === 'kanban' ? 'Phễu tuyển sinh Kanban' : 'Khách hàng tiềm năng'}
+            </h1>
+
+            {/* Thông tin User đăng nhập Liferay */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-lg text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>{currentUserInfo.userName || currentUserInfo.userEmail}</span>
+              <span className="text-[10px] bg-emerald-200/80 text-emerald-900 px-2 py-0.5 rounded font-bold uppercase">
+                {currentRole === 'manager' ? '👑 Quản lý' : `👤 Sale (${currentSaleId})`}
+              </span>
+              <a
+                href="/c/portal/logout"
+                className="ml-2 text-gray-500 hover:text-red-600 transition-colors flex items-center gap-0.5"
+                title="Đăng xuất Liferay"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+
           <p className="text-xs text-gray-500 mt-1.5 flex items-center gap-1">
             {currentRole === 'manager'
-              ? <><ShieldAlert className="w-3.5 h-3.5 text-indigo-500" /> 👑 Vai trò Quản lý: Đang xem toàn bộ cột bao gồm Chưa phân công</>
-              : <><User className="w-3.5 h-3.5 text-purple-500" /> 👤 Vai trò Sale: Chỉ xem các hồ sơ Mới được phân công & quy trình tư vấn</>}
+              ? <><ShieldAlert className="w-3.5 h-3.5 text-indigo-500" /> 👑 <b>Vai trò Quản lý:</b> Toàn quyền phân công (AssignModal), xóa hồ sơ (Delete / Thùng rác), xem toàn bộ Lead của tất cả Sale & cột Chưa phân công.</>
+              : <><User className="w-3.5 h-3.5 text-purple-500" /> 👤 <b>Vai trò Sale:</b> Chỉ xem và kéo các thẻ được gán cho ({currentSaleId}), không có quyền phân công người khác, ẩn nút xóa / thùng rác.</>}
           </p>
         </div>
 
@@ -647,37 +914,20 @@ export const KanbanBoard: React.FC = () => {
           <div className="flex bg-gray-100 p-1 rounded-lg">
             <button
               onClick={() => setActiveView('kanban')}
-              className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${activeView === 'kanban' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500 hover:text-gray-700'
+              className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all cursor-pointer ${activeView === 'kanban' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500 hover:text-gray-700'
                 }`}
             >
               Kanban
             </button>
             <button
               onClick={() => setActiveView('leads')}
-              className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all ${activeView === 'leads' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500 hover:text-gray-700'
+              className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all cursor-pointer ${activeView === 'leads' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500 hover:text-gray-700'
                 }`}
             >
               Dạng Bảng
             </button>
           </div>
 
-          {/* Role Toggle */}
-          <div className="flex bg-indigo-50 p-1 rounded-lg border border-indigo-100">
-            <button
-              onClick={() => setCurrentRole('manager')}
-              className={`px-3 py-1.5 rounded-md text-sm font-bold transition-all flex items-center gap-1.5 ${currentRole === 'manager' ? 'bg-indigo-600 text-white shadow-sm' : 'text-indigo-600 hover:bg-indigo-100'
-                }`}
-            >
-              <ShieldAlert className="w-4 h-4" /> Quản lý
-            </button>
-            <button
-              onClick={() => setCurrentRole('sale')}
-              className={`px-3 py-1.5 rounded-md text-sm font-bold transition-all flex items-center gap-1.5 ${currentRole === 'sale' ? 'bg-purple-600 text-white shadow-sm' : 'text-purple-600 hover:bg-purple-100'
-                }`}
-            >
-              <User className="w-4 h-4" /> Sale
-            </button>
-          </div>
 
           <div className="relative w-64">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -710,33 +960,38 @@ export const KanbanBoard: React.FC = () => {
                   key={column.id}
                   column={colData}
                   onCardClick={(card) => setSelectedCard(card)}
-                  onAssignClick={(card) => setAssignModalCard(card)}
+                  onAssignClick={currentRole === 'manager' ? (card) => setAssignModalCard(card) : undefined}
                   onSelectClassClick={(card) => setClassModalCard(card)}
                   onDealClick={(card) => setDealModalCard(card)}
+                  isManager={currentRole === 'manager'}
+                  currentSaleId={currentSaleId}
                 />
               );
             })}
           </div>
 
-          <Droppable droppableId="trash_cancelled">
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border-2 transition-all shadow-2xl ${isDragging ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto' : 'opacity-0 translate-y-12 scale-90 pointer-events-none'
-                  } ${snapshot.isDraggingOver
-                    ? 'bg-red-600 text-white border-white scale-110 ring-4 ring-red-300'
-                    : 'bg-red-50 text-red-600 border-red-300'
-                  }`}
-              >
-                <Trash2 className="w-5 h-5 animate-pulse" />
-                <span className="font-bold text-sm">
-                  {snapshot.isDraggingOver ? 'Thả vào đây để HỦY hồ sơ' : 'Kéo vào đây để HỦY hồ sơ'}
-                </span>
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+          {/* Với Sale: Ẩn hoàn toàn thùng rác hủy / xóa lead */}
+          {currentRole === 'manager' && (
+            <Droppable droppableId="trash_cancelled">
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full border-2 transition-all shadow-2xl ${isDragging ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto' : 'opacity-0 translate-y-12 scale-90 pointer-events-none'
+                    } ${snapshot.isDraggingOver
+                      ? 'bg-red-600 text-white border-white scale-110 ring-4 ring-red-300'
+                      : 'bg-red-50 text-red-600 border-red-300'
+                    }`}
+                >
+                  <Trash2 className="w-5 h-5 animate-pulse" />
+                  <span className="font-bold text-sm">
+                    {snapshot.isDraggingOver ? 'Thả vào đây để HỦY hồ sơ' : 'Kéo vào đây để HỦY hồ sơ'}
+                  </span>
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          )}
         </DragDropContext>
       ) : (
         /* VIEW 2: LEADS TABLE */
@@ -824,15 +1079,41 @@ export const KanbanBoard: React.FC = () => {
                         )}
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedCard(lead);
-                          }}
-                          className="px-3 py-1 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded border border-blue-200 text-xs font-semibold transition"
-                        >
-                          Chi tiết
-                        </button>
+                        <div className="flex items-center justify-end gap-1.5">
+                          {currentRole === 'manager' && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setAssignModalCard(lead);
+                              }}
+                              className="px-2.5 py-1 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded border border-purple-200 text-xs font-semibold transition cursor-pointer"
+                              title="Phân công tư vấn viên"
+                            >
+                              Phân công
+                            </button>
+                          )}
+                          {currentRole === 'manager' && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteLead(lead.id, lead.name);
+                              }}
+                              className="px-2.5 py-1 bg-red-50 text-red-700 hover:bg-red-600 hover:text-white rounded border border-red-200 text-xs font-semibold transition cursor-pointer"
+                              title="Hủy / Xóa hồ sơ này"
+                            >
+                              Xóa
+                            </button>
+                          )}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedCard(lead);
+                            }}
+                            className="px-3 py-1 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded border border-blue-200 text-xs font-semibold transition cursor-pointer"
+                          >
+                            Chi tiết
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -851,8 +1132,9 @@ export const KanbanBoard: React.FC = () => {
         onSelectClass={handleSelectClass}
         onCreateDeal={handleCreateDeal}
         isManager={currentRole === 'manager'}
+        onDeleteLead={handleDeleteLead}
         onAssignSale={handleAssignSale}
-        onOpenAssignModal={(c) => setAssignModalCard(c)}
+        onOpenAssignModal={currentRole === 'manager' ? (c) => setAssignModalCard(c) : undefined}
         onOpenClassModal={(c) => setClassModalCard(c)}
         onOpenDealModal={(c) => setDealModalCard(c)}
       />

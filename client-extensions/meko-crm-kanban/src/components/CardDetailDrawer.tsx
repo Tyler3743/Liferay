@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import type { KanbanCardType } from '../types/kanban.ts';
-import { X, UserCheck, BookOpen, DollarSign, Phone, Mail, Calendar, MapPin, Tag, ShieldCheck, Clock } from 'lucide-react';
+import { X, UserCheck, BookOpen, DollarSign, Phone, Mail, Calendar, MapPin, Tag, ShieldCheck, Clock, Trash2 } from 'lucide-react';
 
 interface CardDetailDrawerProps {
   card: KanbanCardType | null;
@@ -9,6 +9,7 @@ interface CardDetailDrawerProps {
   onSelectClass?: (cardId: string, classInfo: any) => void;
   onCreateDeal?: (cardId: string, dealInfo: any) => void;
   isManager?: boolean;
+  onDeleteLead?: (cardId: string, cardName?: string) => void;
   onAssignSale?: (cardId: string, saleId: string, saleName: string, note?: string) => void;
   onOpenAssignModal?: (card: KanbanCardType) => void;
   onOpenClassModal?: (card: KanbanCardType) => void;
@@ -19,6 +20,8 @@ export const CardDetailDrawer: React.FC<CardDetailDrawerProps> = ({
   card, 
   onClose, 
   onSaveNote, 
+  isManager = true,
+  onDeleteLead,
   onAssignSale,
   onOpenAssignModal,
   onOpenClassModal,
@@ -106,6 +109,19 @@ export const CardDetailDrawer: React.FC<CardDetailDrawerProps> = ({
               </span>
             </div>
           </div>
+
+          {/* Nút Xóa / Hủy chỉ hiển thị cho Quản lý */}
+          {isManager && onDeleteLead && (
+            <button
+              type="button"
+              onClick={() => onDeleteLead(card.id, card.name)}
+              className="mt-1 p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors cursor-pointer flex items-center gap-1 text-xs font-bold border border-red-200 shrink-0 ml-2"
+              title="Hủy / Xóa hồ sơ này"
+            >
+              <Trash2 className="w-4 h-4" />
+              <span>Xóa</span>
+            </button>
+          )}
         </div>
 
         {/* Scrollable Body */}
@@ -195,8 +211,18 @@ export const CardDetailDrawer: React.FC<CardDetailDrawerProps> = ({
               )}
             </div>
 
-            {/* Nếu đã có Sale và không đang mở form đổi */}
-            {card.assignedName && !isChangingAssign ? (
+            {/* Nếu là Sale: Chỉ xem thông tin phân công ở chế độ chỉ đọc */}
+            {!isManager ? (
+              <div className="bg-white p-3.5 rounded-xl border border-purple-200 shadow-xs">
+                <div>
+                  <div className="text-gray-500 text-[11px]">Tư vấn viên đang phụ trách:</div>
+                  <div className="text-purple-900 font-extrabold text-sm mt-0.5">
+                    {card.assignedName ? `👤 ${card.assignedName}` : '⚠️ Chưa phân công'}
+                  </div>
+                </div>
+              </div>
+            ) : card.assignedName && !isChangingAssign ? (
+              /* Quản lý: Đã có Sale và không đang mở form đổi */
               <div className="bg-white p-3.5 rounded-xl border border-purple-200 shadow-xs">
                 <div className="flex items-center justify-between">
                   <div>
@@ -215,7 +241,7 @@ export const CardDetailDrawer: React.FC<CardDetailDrawerProps> = ({
                 </div>
               </div>
             ) : (
-              /* Form chọn Sale trực tiếp */
+              /* Quản lý: Form chọn Sale trực tiếp */
               <div className="space-y-3 bg-white p-3.5 rounded-xl border border-purple-200 shadow-xs">
                 <div>
                   <label className="block text-gray-700 font-bold mb-1">
