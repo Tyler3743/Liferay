@@ -49,8 +49,17 @@ const columnToInquiryStatus = (colId: string): string => {
   }
 };
 
+// Định nghĩa kiểu dữ liệu UserInfo rõ ràng
+export interface UserInfo {
+  isSignedIn: boolean;
+  userEmail: string;
+  userName: string;
+  detectedRole: 'manager' | 'sale' | null;
+  detectedSaleId: string;
+}
+
 // Lấy thông tin user đăng nhập từ Liferay
-const getLiferayUserInfo = () => {
+const getLiferayUserInfo = (): UserInfo => {
   const win = window as any;
   const td = win.themeDisplay || win.Liferay?.ThemeDisplay;
 
@@ -76,6 +85,17 @@ const getLiferayUserInfo = () => {
     isSignedIn = true;
   }
 
+  // Kiểm tra nếu chưa đăng nhập thì không gán role
+  if (!isSignedIn) {
+    return {
+      isSignedIn: false,
+      userEmail: '',
+      userName: '',
+      detectedRole: null,
+      detectedSaleId: ''
+    };
+  }
+
   let detectedRole: 'manager' | 'sale' = 'manager';
   let detectedSaleId = 'sale01';
 
@@ -90,13 +110,13 @@ const getLiferayUserInfo = () => {
     detectedRole = 'manager';
   }
 
-  return { isSignedIn, userEmail: userEmail || userName, userName: userName || userEmail, detectedRole, detectedSaleId };
+  return { isSignedIn: true, userEmail: userEmail || userName, userName: userName || userEmail, detectedRole, detectedSaleId };
 };
 
 export const KanbanBoard: React.FC = () => {
-  const [currentUserInfo, setCurrentUserInfo] = useState(() => getLiferayUserInfo());
-  const [currentRole, setCurrentRole] = useState<'manager' | 'sale'>(() => getLiferayUserInfo().detectedRole);
-  const [currentSaleId, setCurrentSaleId] = useState<string>(() => getLiferayUserInfo().detectedSaleId);
+  const [currentUserInfo, setCurrentUserInfo] = useState<UserInfo>(() => getLiferayUserInfo());
+  const [currentRole, setCurrentRole] = useState<'manager' | 'sale' | null>(() => currentUserInfo.detectedRole);
+  const [currentSaleId, setCurrentSaleId] = useState<string>(() => currentUserInfo.detectedSaleId);
   const [isCheckingAuth, setIsCheckingAuth] = useState<boolean>(true);
   const [activeView, setActiveView] = useState<'kanban' | 'leads'>('kanban');
 
@@ -818,7 +838,7 @@ export const KanbanBoard: React.FC = () => {
 
   // KỊCH BẢN CHẶN TRUY CẬP: Chưa đăng nhập sẽ KHÔNG vào được giao diện Kanban để kéo thả
   if (!currentUserInfo.isSignedIn) {
-    const loginUrl = `/c/portal/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+    const loginUrl = `/c/portal/login?saveLastPath=false&redirect=${encodeURIComponent('/kanban/')}`;
     return (
       <div className="max-w-[700px] mx-auto my-16 p-8 md:p-12 bg-white border border-gray-200 rounded-3xl shadow-xl text-center">
         <div className="w-20 h-20 bg-amber-50 text-amber-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-inner border border-amber-200">
@@ -844,12 +864,13 @@ export const KanbanBoard: React.FC = () => {
           >
             <LogIn className="w-4 h-4" /> Đăng Nhập Liferay
           </a>
-          <a
-            href="/web/guest/courses"
-            className="w-full sm:w-auto px-6 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm rounded-xl transition-all"
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="w-full sm:w-auto px-6 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm rounded-xl transition-all cursor-pointer"
           >
-            Quay Về Trang Chủ
-          </a>
+            🔄 Tải Lại Bảng Kanban
+          </button>
         </div>
 
         <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-center gap-6 text-xs text-gray-400">

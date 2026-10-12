@@ -5,7 +5,7 @@ import { Header } from '../../common/components/Header.tsx';
 const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-app-bg font-sans bg-gray-50">
-      <Header activePath="/web/guest/kanban" />
+      <Header activePath="/kanban" />
 
       <main>
         <KanbanBoard />

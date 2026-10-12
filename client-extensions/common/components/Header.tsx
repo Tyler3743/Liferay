@@ -68,14 +68,14 @@ export const Header: React.FC<HeaderProps> = ({ activePath }) => {
   return (
     <header className="bg-white border-b border-gray-200 px-8 flex items-center justify-between shadow-sm relative z-50">
       <div className="flex items-center gap-16 lg:gap-32">
-        <div className="text-3xl font-extrabold py-4">
+        <a href="/kanban" className="text-3xl font-extrabold py-4 hover:opacity-90 transition-opacity">
           <span className="text-brand-secondary">Meko</span><span className="text-brand-primary">CRM</span>
-        </div>
+        </a>
 
         <nav className="flex items-center h-full">
           <a 
-            href="/web/guest/kanban" 
-            className={`px-6 lg:px-12 py-4 text-base h-full flex items-center ${isActive('/web/guest/kanban') ? 'font-bold text-brand-primary border-b-2 border-brand-primary' : 'font-medium text-gray-500 hover:text-gray-900'}`}
+            href="/kanban" 
+            className={`px-6 lg:px-12 py-4 text-base h-full flex items-center ${activePath === '/kanban' || activePath === '/web/guest/kanban' || isActive('/kanban') || isActive('/web/guest/kanban') ? 'font-bold text-brand-primary border-b-2 border-brand-primary' : 'font-medium text-gray-500 hover:text-gray-900'}`}
           >
             Phễu tuyển sinh
           </a>
